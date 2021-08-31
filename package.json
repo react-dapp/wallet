@@ -1,7 +1,7 @@
 {
   "name": "@dapp-utils/wallet",
   "version": "0.0.11",
-  "main": "dist/index.esm.js",
+  "main": "dist/index.cjs.js",
   "module": "dist/index.esm.js",
   "source": "src/main/index.js",
   "files": [
@@ -50,8 +50,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "rollup -c",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "publish": "npm run build && npm version patch && npm publish --access public"
   },
   "eslintConfig": {
     "extends": [

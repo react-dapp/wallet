@@ -1,15 +1,28 @@
-import React, { useContext, useState, useEffect, useCallback, useRef, useMemo } from 'react';
-import { useWeb3React, UnsupportedChainIdError, Web3ReactProvider } from '@web3-react/core';
-import { makeStyles, Dialog, Typography, Divider, Grid } from '@material-ui/core';
-import CloseIcon from '@material-ui/icons/Close';
-import HelpOutlineOutlinedIcon from '@material-ui/icons/HelpOutlineOutlined';
-import { InjectedConnector, NoEthereumProviderError, UserRejectedRequestError } from '@web3-react/injected-connector';
-import { WalletConnectConnector, UserRejectedRequestError as UserRejectedRequestError$1 } from '@web3-react/walletconnect-connector';
-import { BscConnector, NoBscProviderError } from '@binance-chain/bsc-connector';
-import BigNumber from 'bignumber.js/bignumber';
-import BigNumber$1 from 'bignumber.js';
-import Web3 from 'web3';
-import { Multicall } from 'ethereum-multicall';
+'use strict';
+
+Object.defineProperty(exports, '__esModule', { value: true });
+
+var React = require('react');
+var core$1 = require('@web3-react/core');
+var core = require('@material-ui/core');
+var CloseIcon = require('@material-ui/icons/Close');
+var HelpOutlineOutlinedIcon = require('@material-ui/icons/HelpOutlineOutlined');
+var injectedConnector = require('@web3-react/injected-connector');
+var walletconnectConnector = require('@web3-react/walletconnect-connector');
+var bscConnector = require('@binance-chain/bsc-connector');
+var BigNumber = require('bignumber.js/bignumber');
+var BigNumber$1 = require('bignumber.js');
+var Web3 = require('web3');
+var ethereumMulticall = require('ethereum-multicall');
+
+function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
+
+var React__default = /*#__PURE__*/_interopDefaultLegacy(React);
+var CloseIcon__default = /*#__PURE__*/_interopDefaultLegacy(CloseIcon);
+var HelpOutlineOutlinedIcon__default = /*#__PURE__*/_interopDefaultLegacy(HelpOutlineOutlinedIcon);
+var BigNumber__default = /*#__PURE__*/_interopDefaultLegacy(BigNumber);
+var BigNumber__default$1 = /*#__PURE__*/_interopDefaultLegacy(BigNumber$1);
+var Web3__default = /*#__PURE__*/_interopDefaultLegacy(Web3);
 
 function ownKeys(object, enumerableOnly) {
   var keys = Object.keys(object);
@@ -214,7 +227,7 @@ function _nonIterableRest() {
 }
 
 var _excluded$1 = ["children"];
-var useStyles$2 = makeStyles(function (theme) {
+var useStyles$2 = core.makeStyles(function (theme) {
   var _body;
 
   return {
@@ -241,14 +254,14 @@ var CustomCard = function CustomCard(_ref) {
       restProps = _objectWithoutProperties(_ref, _excluded$1);
 
   var classes = useStyles$2();
-  return /*#__PURE__*/React.createElement("div", _extends({
+  return /*#__PURE__*/React__default['default'].createElement("div", _extends({
     className: classes.root
-  }, restProps), /*#__PURE__*/React.createElement("div", {
+  }, restProps), /*#__PURE__*/React__default['default'].createElement("div", {
     className: classes.body
   }, children));
 };
 
-var WalletModalContext = /*#__PURE__*/React.createContext({
+var WalletModalContext = /*#__PURE__*/React__default['default'].createContext({
   open: false,
   error: undefined,
   setOpen: function setOpen() {},
@@ -256,11 +269,11 @@ var WalletModalContext = /*#__PURE__*/React.createContext({
 });
 
 var useWalletModal = function useWalletModal() {
-  var _useWeb3React = useWeb3React(),
+  var _useWeb3React = core$1.useWeb3React(),
       activate = _useWeb3React.activate,
       deactivate = _useWeb3React.deactivate;
 
-  var _useContext = useContext(WalletModalContext),
+  var _useContext = React.useContext(WalletModalContext),
       open = _useContext.open,
       setOpen = _useContext.setOpen,
       error = _useContext.error,
@@ -277,7 +290,7 @@ var useWalletModal = function useWalletModal() {
 };
 
 var _excluded = ["open", "close", "isDarkMode"];
-var useStyles$1 = makeStyles(function () {
+var useStyles$1 = core.makeStyles(function () {
   return {
     root: {
       padding: 20,
@@ -321,7 +334,7 @@ var ModalManager = function ModalManager(_ref) {
       props = _objectWithoutProperties(_ref, _excluded);
 
   var classes = useStyles$1();
-  return /*#__PURE__*/React.createElement(Dialog, {
+  return /*#__PURE__*/React__default['default'].createElement(core.Dialog, {
     open: open,
     onClose: close,
     maxWidth: "xl",
@@ -337,15 +350,15 @@ var ModalManager = function ModalManager(_ref) {
         borderRadius: 15
       }
     }
-  }, /*#__PURE__*/React.createElement(CloseIcon, {
+  }, /*#__PURE__*/React__default['default'].createElement(CloseIcon__default['default'], {
     className: isDarkMode ? classes.darkCloseIcon : classes.closeIcon,
     fontSize: "small",
     onClick: close
-  }), isDarkMode ? /*#__PURE__*/React.createElement(CustomCard, {
+  }), isDarkMode ? /*#__PURE__*/React__default['default'].createElement(CustomCard, {
     style: {
       overflow: "auto"
     }
-  }, props.children) : /*#__PURE__*/React.createElement("div", {
+  }, props.children) : /*#__PURE__*/React__default['default'].createElement("div", {
     className: classes.root
   }, props.children));
 };
@@ -364,7 +377,7 @@ var img$1 = "data:image/svg+xml,%3csvg viewBox='0 0 32 32' width='32px' color='t
 
 var img = "data:image/svg+xml,%3csvg viewBox='0 0 96 96' width='32px' color='text' xmlns='http://www.w3.org/2000/svg' class='sc-bdfBwQ lkvAzg'%3e %3ccircle cx='48' cy='48' r='48' fill='%23F5F5F5'%3e%3c/circle%3e %3cpath d='M56.5504425%2c41.9387033 L56.5504425%2c50.4659601 L47.3948342%2c50.4659601 L47.3948342%2c85.5971142 L45.0078131%2c84.7075452 C43.8992633%2c84.2955753 42.1136272%2c83.5937969 39.9052997%2c82.5918134 L38.8675775%2c82.1177881 L38.8675775%2c14.6817622 L47.9569067%2c11.8769231 L56.5504425%2c14.5267861 L56.5504425%2c23.7259307 L47.9569067%2c21.0669705 L47.3948342%2c21.2411155 L47.3948342%2c41.9387033 L56.5504425%2c41.9387033 Z M16%2c50.4659926 L16%2c21.7739797 L36.1702794%2c15.548296 L36.1702794%2c24.7052039 L24.526282%2c28.3200122 L24.526282%2c41.9387358 L36.1702794%2c41.9387358 L36.1702794%2c81.3806284 L33.591244%2c80.0543973 C25.5662786%2c75.923652 16%2c68.9585019 16%2c59.2339983 L16%2c54.6496962 L24.526282%2c54.6496962 L24.526282%2c59.2339983 C24.526282%2c61.2460878 25.5734263%2c63.3605199 27.6426978%2c65.5373324 L27.6426978%2c50.4659926 L16%2c50.4659926 Z M59.1389325%2c15.3302574 L79.8040306%2c21.7261873 L79.8040306%2c50.4659601 L67.6710627%2c50.4659601 L67.6710627%2c62.9111544 C67.6710627%2c62.9111544 64.9581695%2c66.4674811 59.1464051%2c69.4451657 C59.1464051%2c67.0682164 59.1389325%2c15.3302574 59.1389325%2c15.3302574 Z M71.2780734%2c41.9387033 L71.2780734%2c28.2783928 L67.6710627%2c27.1649695 L67.6710627%2c41.9387033 L71.2780734%2c41.9387033 Z M71.2780734%2c59.8661186 L71.2780734%2c54.6495662 L79.8040306%2c54.6495662 L79.8040306%2c59.8661186 C79.8040306%2c74.3588162 58.7760221%2c82.7005566 52.330058%2c84.9127828 L49.9859233%2c85.7230769 L49.9859233%2c76.7068496 L51.1311866%2c76.2744112 C61.1591444%2c72.5004032 71.2780734%2c65.962818 71.2780734%2c59.8661186 Z' fill='black'%3e%3c/path%3e%3c/svg%3e";
 
-BigNumber.config({
+BigNumber__default['default'].config({
   EXPONENTIAL_AT: 1000,
   DECIMAL_PLACES: 80
 });
@@ -416,7 +429,7 @@ var config = {
   }
 };
 
-var ConfigContext = /*#__PURE__*/React.createContext({
+var ConfigContext = /*#__PURE__*/React__default['default'].createContext({
   config: config,
   setConfig: function setConfig() {}
 });
@@ -425,14 +438,14 @@ var ConfigProvider = function ConfigProvider(_ref) {
   var children = _ref.children,
       config$1 = _ref.config;
 
-  var _useState = useState(_objectSpread2(_objectSpread2(_objectSpread2({}, config), config$1), {}, {
+  var _useState = React.useState(_objectSpread2(_objectSpread2(_objectSpread2({}, config), config$1), {}, {
     rpcUrls: _objectSpread2(_objectSpread2({}, config), config$1)
   })),
       _useState2 = _slicedToArray(_useState, 2),
       _config = _useState2[0],
       _setConfig = _useState2[1];
 
-  return /*#__PURE__*/React.createElement(ConfigContext.Provider, {
+  return /*#__PURE__*/React__default['default'].createElement(ConfigContext.Provider, {
     value: {
       config: _config,
       setConfig: _setConfig
@@ -441,7 +454,7 @@ var ConfigProvider = function ConfigProvider(_ref) {
 };
 
 var useConfig = function useConfig() {
-  return useContext(ConfigContext);
+  return React.useContext(ConfigContext);
 };
 
 var connectorNames = {
@@ -453,21 +466,21 @@ var useConnectors = function useConnectors() {
   var _useConfig = useConfig(),
       config = _useConfig.config;
 
-  var _useState = useState(undefined),
+  var _useState = React.useState(undefined),
       _useState2 = _slicedToArray(_useState, 2),
       connectorsByName = _useState2[0],
       setConnectorsByName = _useState2[1];
 
-  useEffect(function () {
+  React.useEffect(function () {
     var _setConnectorsByName;
 
-    var injected = new InjectedConnector({
+    var injected = new injectedConnector.InjectedConnector({
       supportedChainIds: config.supportedChainIds
     });
-    var bsc = new BscConnector({
+    var bsc = new bscConnector.BscConnector({
       supportedChainIds: config.supportedChainIds
     });
-    var walletconnect = new WalletConnectConnector({
+    var walletconnect = new walletconnectConnector.WalletConnectConnector({
       rpc: config.rpcUrls,
       bridge: 'https://bridge.walletconnect.org',
       qrcode: true,
@@ -626,17 +639,17 @@ var addTokenToWallet = /*#__PURE__*/function () {
 var toLower = function toLower(value) {
   var decimals = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : "18";
   var bignumber = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;
-  var ans = new BigNumber$1("0");
-  if (value) ans = new BigNumber$1(value.toString()).div(new BigNumber$1(10).exponentiatedBy(decimals));
+  var ans = new BigNumber__default$1['default']("0");
+  if (value) ans = new BigNumber__default$1['default'](value.toString()).div(new BigNumber__default$1['default'](10).exponentiatedBy(decimals));
   if (bignumber) return ans;else return ans.toNumber();
 };
 var toUpper = function toUpper(value) {
   var decimals = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : "18";
   var bignumber = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;
-  var ans = new BigNumber$1("0");
+  var ans = new BigNumber__default$1['default']("0");
 
   if (value) {
-    ans = new BigNumber$1(value.toString()).times(new BigNumber$1(10).exponentiatedBy(decimals));
+    ans = new BigNumber__default$1['default'](value.toString()).times(new BigNumber__default$1['default'](10).exponentiatedBy(decimals));
   }
 
   if (bignumber) return ans;else return ans.toNumber();
@@ -676,7 +689,7 @@ var useWallet = function useWallet(chainId) {
       config = _useConfig.config;
 
   var connectorsByName = useConnectors();
-  var login = useCallback(function (connectorID) {
+  var login = React.useCallback(function (connectorID) {
     if (!connectorsByName) return;
     var connector = connectorsByName[connectorID];
 
@@ -689,7 +702,7 @@ var useWallet = function useWallet(chainId) {
             while (1) {
               switch (_context.prev = _context.next) {
                 case 0:
-                  if (!(error instanceof UnsupportedChainIdError)) {
+                  if (!(error instanceof core$1.UnsupportedChainIdError)) {
                     _context.next = 14;
                     break;
                   }
@@ -726,10 +739,10 @@ var useWallet = function useWallet(chainId) {
                 case 14:
                   window.localStorage.removeItem(connectorLocalStorageKey);
 
-                  if (error instanceof NoEthereumProviderError || error instanceof NoBscProviderError) {
+                  if (error instanceof injectedConnector.NoEthereumProviderError || error instanceof bscConnector.NoBscProviderError) {
                     setError('Provider Error', 'No provider was found');
-                  } else if (error instanceof UserRejectedRequestError || error instanceof UserRejectedRequestError$1) {
-                    if (connector instanceof WalletConnectConnector) {
+                  } else if (error instanceof injectedConnector.UserRejectedRequestError || error instanceof walletconnectConnector.UserRejectedRequestError) {
+                    if (connector instanceof walletconnectConnector.WalletConnectConnector) {
                       connector.walletConnectProvider = null;
                     }
 
@@ -758,7 +771,7 @@ var useWallet = function useWallet(chainId) {
   return login;
 };
 
-var useStyles = makeStyles(function (theme) {
+var useStyles = core.makeStyles(function (theme) {
   return {
     root: {
       color: 'rgba(0,0,0,0.8)'
@@ -815,50 +828,50 @@ var WalletModal = function WalletModal(_ref) {
   var _useWalletModal = useWalletModal(),
       setOpen = _useWalletModal.setOpen;
 
-  var _useWeb3React = useWeb3React(),
+  var _useWeb3React = core$1.useWeb3React(),
       library = _useWeb3React.library;
 
-  useEffect(function () {
+  React.useEffect(function () {
     if (library) {
       setOpen(false);
     }
   }, [library]);
-  return /*#__PURE__*/React.createElement("div", {
+  return /*#__PURE__*/React__default['default'].createElement("div", {
     className: classes.root
-  }, /*#__PURE__*/React.createElement(Typography, {
+  }, /*#__PURE__*/React__default['default'].createElement(core.Typography, {
     className: "acmeFont",
     variant: "h6",
     style: {
       marginBottom: 20
     }
-  }, "Connect Wallet"), /*#__PURE__*/React.createElement(Divider, null), /*#__PURE__*/React.createElement(Grid, {
+  }, "Connect Wallet"), /*#__PURE__*/React__default['default'].createElement(core.Divider, null), /*#__PURE__*/React__default['default'].createElement(core.Grid, {
     container: true,
     spacing: 1,
     className: classes.grid
   }, wallets.filter(function (i) {
     return isBSC || i.connector !== connectorNames.bsc;
   }).map(function (item, index) {
-    return /*#__PURE__*/React.createElement(Grid, {
+    return /*#__PURE__*/React__default['default'].createElement(core.Grid, {
       item: true,
       xs: 12,
       key: index
-    }, /*#__PURE__*/React.createElement("div", {
+    }, /*#__PURE__*/React__default['default'].createElement("div", {
       className: "flex ".concat(isDarkMode ? classes.darkWalletBtn : classes.walletBtn),
       onClick: function onClick() {
         return login(item.connector);
       }
-    }, /*#__PURE__*/React.createElement(Typography, {
+    }, /*#__PURE__*/React__default['default'].createElement(core.Typography, {
       className: isDarkMode ? classes.darkTitle : classes.title
-    }, item.title), /*#__PURE__*/React.createElement("img", {
+    }, item.title), /*#__PURE__*/React__default['default'].createElement("img", {
       alt: "",
       src: item.image
     })));
-  })), /*#__PURE__*/React.createElement(Typography, {
+  })), /*#__PURE__*/React__default['default'].createElement(core.Typography, {
     className: "flex ".concat(classes.learnText)
-  }, /*#__PURE__*/React.createElement(HelpOutlineOutlinedIcon, null), "\xA0Learn how to connect"));
+  }, /*#__PURE__*/React__default['default'].createElement(HelpOutlineOutlinedIcon__default['default'], null), "\xA0Learn how to connect"));
 };
 
-BigNumber$1.config({
+BigNumber__default$1['default'].config({
   EXPONENTIAL_AT: 1000,
   DECIMAL_PLACES: 80
 });
@@ -868,39 +881,39 @@ var WalletProvider = function WalletProvider(_ref) {
   var children = _ref.children,
       config = _ref.config;
 
-  var _useState = useState(false),
+  var _useState = React.useState(false),
       _useState2 = _slicedToArray(_useState, 2),
       isWalletOpen = _useState2[0],
       setIsWalletOpen = _useState2[1];
 
-  var _useState3 = useState(undefined),
+  var _useState3 = React.useState(undefined),
       _useState4 = _slicedToArray(_useState3, 2),
       error = _useState4[0],
       setError = _useState4[1];
 
-  useEffect(function () {
+  React.useEffect(function () {
     if (error) console.log('Unable to connect Wallet!', error);
   }, [error]);
-  return /*#__PURE__*/React.createElement(Web3ReactProvider, {
+  return /*#__PURE__*/React__default['default'].createElement(core$1.Web3ReactProvider, {
     getLibrary: function getLibrary(provider) {
       return provider;
     }
-  }, /*#__PURE__*/React.createElement(WalletModalContext.Provider, {
+  }, /*#__PURE__*/React__default['default'].createElement(WalletModalContext.Provider, {
     value: {
       open: isWalletOpen,
       setOpen: setIsWalletOpen,
       error: error,
       setError: setError
     }
-  }, /*#__PURE__*/React.createElement(ConfigProvider, {
+  }, /*#__PURE__*/React__default['default'].createElement(ConfigProvider, {
     config: config
-  }, children, /*#__PURE__*/React.createElement(ModalManager, {
+  }, children, /*#__PURE__*/React__default['default'].createElement(ModalManager, {
     isDarkMode: config === null || config === void 0 ? void 0 : config.darkMode,
     open: isWalletOpen,
     close: function close() {
       return setIsWalletOpen(false);
     }
-  }, /*#__PURE__*/React.createElement(WalletModal, {
+  }, /*#__PURE__*/React__default['default'].createElement(WalletModal, {
     isBSC: config === null || config === void 0 ? void 0 : config.bsc,
     isDarkMode: config === null || config === void 0 ? void 0 : config.darkMode,
     chainId: (_config$chainId = config.chainId) !== null && _config$chainId !== void 0 ? _config$chainId : 56
@@ -940,7 +953,7 @@ var _binanceChainListener = /*#__PURE__*/function () {
 
 var useEagerConnect = function useEagerConnect() {
   var login = useWallet();
-  useEffect(function () {
+  React.useEffect(function () {
     var connectorId = window.localStorage.getItem(connectorLocalStorageKey);
 
     if (connectorId) {
@@ -968,7 +981,7 @@ var useEagerConnect = function useEagerConnect() {
  */
 
 var useWeb3 = function useWeb3() {
-  var _useState = useState(undefined),
+  var _useState = React.useState(undefined),
       _useState2 = _slicedToArray(_useState, 2),
       balance = _useState2[0],
       setBalance = _useState2[1];
@@ -981,28 +994,28 @@ var useWeb3 = function useWeb3() {
   var rpc = config.rpcUrls[config.chainId];
 
   if (rpc) {
-    httpProvider = new Web3.providers.HttpProvider(rpc);
-    web3NoAccount = new Web3(httpProvider);
+    httpProvider = new Web3__default['default'].providers.HttpProvider(rpc);
+    web3NoAccount = new Web3__default['default'](httpProvider);
   }
 
-  var _useWeb3React = useWeb3React(),
+  var _useWeb3React = core$1.useWeb3React(),
       library = _useWeb3React.library,
       account = _useWeb3React.account;
 
-  var refEth = useRef(library);
+  var refEth = React.useRef(library);
 
-  var _useState3 = useState(library ? new Web3(library) : web3NoAccount),
+  var _useState3 = React.useState(library ? new Web3__default['default'](library) : web3NoAccount),
       _useState4 = _slicedToArray(_useState3, 2),
       web3 = _useState4[0],
       setweb3 = _useState4[1];
 
-  useEffect(function () {
+  React.useEffect(function () {
     if (library !== refEth.current) {
-      setweb3(library ? new Web3(library) : web3NoAccount);
+      setweb3(library ? new Web3__default['default'](library) : web3NoAccount);
       refEth.current = library;
     }
   }, [library]);
-  useEffect(function () {
+  React.useEffect(function () {
     var fetch = /*#__PURE__*/function () {
       var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
         var bal;
@@ -2022,12 +2035,12 @@ var useLp = function useLp(address, baseTokenSymbol, baseTokenAddress) {
   var _useWeb = useWeb3(),
       web3 = _useWeb.web3;
 
-  var _useState = useState(false),
+  var _useState = React.useState(false),
       _useState2 = _slicedToArray(_useState, 2),
       loading = _useState2[0],
       setLoading = _useState2[1];
 
-  var _useState3 = useState({
+  var _useState3 = React.useState({
     name: undefined,
     symbol: undefined,
     token0: undefined,
@@ -2037,7 +2050,7 @@ var useLp = function useLp(address, baseTokenSymbol, baseTokenAddress) {
       lp = _useState4[0],
       setLp = _useState4[1];
 
-  var _useState5 = useState({
+  var _useState5 = React.useState({
     name: undefined,
     symbol: undefined,
     decimals: undefined,
@@ -2049,7 +2062,7 @@ var useLp = function useLp(address, baseTokenSymbol, baseTokenAddress) {
       token0 = _useState6[0],
       setToken0 = _useState6[1];
 
-  var _useState7 = useState({
+  var _useState7 = React.useState({
     name: undefined,
     symbol: undefined,
     decimals: undefined,
@@ -2061,7 +2074,7 @@ var useLp = function useLp(address, baseTokenSymbol, baseTokenAddress) {
       token1 = _useState8[0],
       setToken1 = _useState8[1];
 
-  var _useState9 = useState({
+  var _useState9 = React.useState({
     token0: undefined,
     token1: undefined,
     basePrice: undefined
@@ -2079,7 +2092,7 @@ var useLp = function useLp(address, baseTokenSymbol, baseTokenAddress) {
             case 0:
               setLoading(true);
               _context.prev = 1;
-              multicall = new Multicall({
+              multicall = new ethereumMulticall.Multicall({
                 web3Instance: web3,
                 tryAggregate: true
               });
@@ -2201,15 +2214,15 @@ var useLp = function useLp(address, baseTokenSymbol, baseTokenAddress) {
     };
   }();
 
-  useEffect(function () {
+  React.useEffect(function () {
     if (web3) fetchData();
   }, [web3]);
-  useEffect(function () {
+  React.useEffect(function () {
     if (lp.name && token0.name && token1.name) {
-      var token0Balance = new BigNumber$1(token0.lpBalance.hex, 16);
-      var token1Balance = new BigNumber$1(token1.lpBalance.hex, 16);
-      var token0Price = token1Balance.div(new BigNumber$1(10).exponentiatedBy(token1.decimals)).div(token0Balance.div(new BigNumber$1(10).exponentiatedBy(token0.decimals)));
-      var token1Price = token0Balance.div(new BigNumber$1(10).exponentiatedBy(token0.decimals)).div(token1Balance.div(new BigNumber$1(10).exponentiatedBy(token1.decimals)));
+      var token0Balance = new BigNumber__default$1['default'](token0.lpBalance.hex, 16);
+      var token1Balance = new BigNumber__default$1['default'](token1.lpBalance.hex, 16);
+      var token0Price = token1Balance.div(new BigNumber__default$1['default'](10).exponentiatedBy(token1.decimals)).div(token0Balance.div(new BigNumber__default$1['default'](10).exponentiatedBy(token0.decimals)));
+      var token1Price = token0Balance.div(new BigNumber__default$1['default'](10).exponentiatedBy(token0.decimals)).div(token1Balance.div(new BigNumber__default$1['default'](10).exponentiatedBy(token1.decimals)));
       setPrice({
         token0: token0Price,
         token1: token1Price,
@@ -2241,12 +2254,12 @@ var useUSDLp = function useUSDLp(address) {
   var native_usd_lp = useLp(nativeUsdLp.address, wrappedNative.symbol);
   var token_native_lp = useLp(address, wrappedNative.symbol);
 
-  var _useState11 = useState(undefined),
+  var _useState11 = React.useState(undefined),
       _useState12 = _slicedToArray(_useState11, 2),
       price = _useState12[0],
       setPrice = _useState12[1];
 
-  useEffect(function () {
+  React.useEffect(function () {
     var _native_usd_lp$price, _token_native_lp$pric;
 
     if (native_usd_lp !== null && native_usd_lp !== void 0 && (_native_usd_lp$price = native_usd_lp.price) !== null && _native_usd_lp$price !== void 0 && _native_usd_lp$price.basePrice && token_native_lp !== null && token_native_lp !== void 0 && (_token_native_lp$pric = token_native_lp.price) !== null && _token_native_lp$pric !== void 0 && _token_native_lp$pric.basePrice && !native_usd_lp.loading && !token_native_lp.loading) {
@@ -4140,7 +4153,7 @@ var useERC721 = function useERC721(address) {
   var _useWeb = useWeb3(),
       web3 = _useWeb.web3;
 
-  return useMemo(function () {
+  return React.useMemo(function () {
     return getContract(ERC721_ABI, address, web3);
   }, [web3]);
 };
@@ -4148,7 +4161,7 @@ var useERC1155 = function useERC1155(address) {
   var _useWeb2 = useWeb3(),
       web3 = _useWeb2.web3;
 
-  return useMemo(function () {
+  return React.useMemo(function () {
     return getContract(ERC1155_ABI, address, web3);
   }, [web3]);
 };
@@ -4156,7 +4169,7 @@ var useERC20 = function useERC20(address) {
   var _useWeb3 = useWeb3(),
       web3 = _useWeb3.web3;
 
-  return useMemo(function () {
+  return React.useMemo(function () {
     return getContract(ERC20_ABI, address, web3);
   }, [web3]);
 };
@@ -4168,19 +4181,19 @@ var STATE = {
   SUCCEED: "SUCCEED"
 };
 
-var ZERO_BALANCE = new BigNumber$1(0);
+var ZERO_BALANCE = new BigNumber__default$1['default'](0);
 var useERC20Approval = function useERC20Approval(erc20Address, toApprove, requiredApprovedBalance) {
-  var _useState = useState(ZERO_BALANCE),
+  var _useState = React.useState(ZERO_BALANCE),
       _useState2 = _slicedToArray(_useState, 2),
       approvedBalance = _useState2[0],
       setApprovedBalance = _useState2[1];
 
-  var _useState3 = useState(STATE.IDLE),
+  var _useState3 = React.useState(STATE.IDLE),
       _useState4 = _slicedToArray(_useState3, 2),
       approveState = _useState4[0],
       setApproveState = _useState4[1];
 
-  var _useState5 = useState(false),
+  var _useState5 = React.useState(false),
       _useState6 = _slicedToArray(_useState5, 2),
       isApproved = _useState6[0],
       setIsApproved = _useState6[1];
@@ -4212,9 +4225,9 @@ var useERC20Approval = function useERC20Approval(erc20Address, toApprove, requir
 
             case 6:
               bal = _context.sent;
-              approveBal = new BigNumber$1(bal);
+              approveBal = new BigNumber__default$1['default'](bal);
               setApprovedBalance(approveBal);
-              setIsApproved(approveBal.gte(new BigNumber$1(requiredApprovedBalance ? requiredApprovedBalance : 1)));
+              setIsApproved(approveBal.gte(new BigNumber__default$1['default'](requiredApprovedBalance ? requiredApprovedBalance : 1)));
               _context.next = 15;
               break;
 
@@ -4236,7 +4249,7 @@ var useERC20Approval = function useERC20Approval(erc20Address, toApprove, requir
     };
   }();
 
-  useEffect(function () {
+  React.useEffect(function () {
     if (account && token) {
       fetchApprovedBalance();
     }
@@ -4291,12 +4304,12 @@ var useERC20Approval = function useERC20Approval(erc20Address, toApprove, requir
   };
 };
 var useERC721Approval = function useERC721Approval(erc721Address, toApprove) {
-  var _useState7 = useState(false),
+  var _useState7 = React.useState(false),
       _useState8 = _slicedToArray(_useState7, 2),
       isApproved = _useState8[0],
       setIsApproved = _useState8[1];
 
-  var _useState9 = useState(STATE.BUSY),
+  var _useState9 = React.useState(STATE.BUSY),
       _useState10 = _slicedToArray(_useState9, 2),
       approveState = _useState10[0],
       setApproveState = _useState10[1];
@@ -4336,7 +4349,7 @@ var useERC721Approval = function useERC721Approval(erc721Address, toApprove) {
     };
   }();
 
-  useEffect(function () {
+  React.useEffect(function () {
     if (account && contract) {
       fetchApproved();
     }
@@ -4391,7 +4404,7 @@ var useERC721Approval = function useERC721Approval(erc721Address, toApprove) {
 };
 
 var useERC20Balance = function useERC20Balance(address) {
-  var _useState = useState(undefined),
+  var _useState = React.useState(undefined),
       _useState2 = _slicedToArray(_useState, 2),
       balance = _useState2[0],
       setBalance = _useState2[1];
@@ -4401,7 +4414,7 @@ var useERC20Balance = function useERC20Balance(address) {
   var _useWeb = useWeb3(),
       account = _useWeb.account;
 
-  useEffect(function () {
+  React.useEffect(function () {
     var fetch = /*#__PURE__*/function () {
       var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
         var bal;
@@ -4440,27 +4453,27 @@ var useInputValue = function useInputValue(maxValue) {
   var decimals = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : "18";
   var fixedDecimals = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 2;
 
-  var _useState = useState(''),
+  var _useState = React.useState(''),
       _useState2 = _slicedToArray(_useState, 2),
       value = _useState2[0],
       _setValue = _useState2[1];
 
-  var _useState3 = useState(false),
+  var _useState3 = React.useState(false),
       _useState4 = _slicedToArray(_useState3, 2),
       max = _useState4[0],
       _setMax = _useState4[1];
 
-  var _useState5 = useState(null),
+  var _useState5 = React.useState(null),
       _useState6 = _slicedToArray(_useState5, 2),
       error = _useState6[0],
       setError = _useState6[1];
 
-  var _useState7 = useState(null),
+  var _useState7 = React.useState(null),
       _useState8 = _slicedToArray(_useState7, 2),
       maxDisplayValue = _useState8[0],
       setMaxDisplayValue = _useState8[1];
 
-  useEffect(function () {
+  React.useEffect(function () {
     setMaxDisplayValue(toLower(maxValue, decimals).toFixed(fixedDecimals));
   }, [maxValue]);
 
@@ -4480,11 +4493,11 @@ var useInputValue = function useInputValue(maxValue) {
 
     _setMax(false);
 
-    if (toUpper(_value, decimals).gt(BigNumber$1(maxValue))) setError("Invalid Amount!");else setError(null);
+    if (toUpper(_value, decimals).gt(BigNumber__default$1['default'](maxValue))) setError("Invalid Amount!");else setError(null);
   };
 
   var getValue = function getValue() {
-    return max ? new BigNumber$1(maxValue).toString() : toUpper(value, decimals, true).toString();
+    return max ? new BigNumber__default$1['default'](maxValue).toString() : toUpper(value, decimals, true).toString();
   };
 
   var selectMaxValue = function selectMaxValue() {
@@ -4506,12 +4519,12 @@ var useInputValue = function useInputValue(maxValue) {
 };
 
 var useWaleltSign = function useWaleltSign() {
-  var _useState = useState(null),
+  var _useState = React.useState(null),
       _useState2 = _slicedToArray(_useState, 2),
       signature = _useState2[0],
       setSignature = _useState2[1];
 
-  var _useState3 = useState(STATE.IDLE),
+  var _useState3 = React.useState(STATE.IDLE),
       _useState4 = _slicedToArray(_useState3, 2),
       signState = _useState4[0],
       setSignState = _useState4[1];
@@ -4568,4 +4581,26 @@ var useWaleltSign = function useWaleltSign() {
   };
 };
 
-export { constants as CONSTANTS, WalletProvider, ZERO_BALANCE, addTokenToWallet, connectorNames, getTimeLeft, switchChain, toLower, toUpper, useConnectors, useERC1155, useERC20, useERC20Approval, useERC20Balance, useERC721, useERC721Approval, useEagerConnect, useInputValue, useLp, useUSDLp, useWaleltSign, useWalletModal, useWeb3 };
+exports.CONSTANTS = constants;
+exports.WalletProvider = WalletProvider;
+exports.ZERO_BALANCE = ZERO_BALANCE;
+exports.addTokenToWallet = addTokenToWallet;
+exports.connectorNames = connectorNames;
+exports.getTimeLeft = getTimeLeft;
+exports.switchChain = switchChain;
+exports.toLower = toLower;
+exports.toUpper = toUpper;
+exports.useConnectors = useConnectors;
+exports.useERC1155 = useERC1155;
+exports.useERC20 = useERC20;
+exports.useERC20Approval = useERC20Approval;
+exports.useERC20Balance = useERC20Balance;
+exports.useERC721 = useERC721;
+exports.useERC721Approval = useERC721Approval;
+exports.useEagerConnect = useEagerConnect;
+exports.useInputValue = useInputValue;
+exports.useLp = useLp;
+exports.useUSDLp = useUSDLp;
+exports.useWaleltSign = useWaleltSign;
+exports.useWalletModal = useWalletModal;
+exports.useWeb3 = useWeb3;
