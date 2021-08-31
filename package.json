@@ -1,11 +1,11 @@
 {
   "name": "@dapp-utils/wallet",
   "version": "0.0.9",
-  "main": "dist/index.js",
+  "main": "src/main/index.js",
   "module": "dist/index.esm.js",
   "source": "src/main/index.js",
   "files": [
-    "./dist"
+    "dist"
   ],
   "publishConfig": {
     "access": "public",
