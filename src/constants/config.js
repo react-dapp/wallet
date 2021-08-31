@@ -1,3 +1,10 @@
+import BigNumber from 'bignumber.js/bignumber'
+
+BigNumber.config({
+    EXPONENTIAL_AT: 1000,
+    DECIMAL_PLACES: 80,
+})
+
 const config = {
     chainId: 56,
     bsc: true,

@@ -3,6 +3,7 @@ import external from 'rollup-plugin-peer-deps-external';
 import del from 'rollup-plugin-delete';
 import pkg from './package.json';
 import image from '@rollup/plugin-image'
+import json from '@rollup/plugin-json';
 
 export default {
     input: [
@@ -13,6 +14,7 @@ export default {
         { file: pkg.module, format: 'esm' }
     ],
     plugins: [
+        json(),
         image(),
         external(),
         babel({

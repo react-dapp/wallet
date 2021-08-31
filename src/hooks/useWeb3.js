@@ -9,6 +9,7 @@ import { useConfig } from '../contexts/configContext'
  * Recreate web3 instance only if the provider change
  */
 export const useWeb3 = () => {
+    const [balance, setBalance] = useState(undefined)
     const { config } = useConfig()
     let httpProvider
     let web3NoAccount;
@@ -30,5 +31,21 @@ export const useWeb3 = () => {
         }
     }, [library])
 
-    return { web3, account, connected: account ? true : false }
+    useEffect(() => {
+        const fetch = async () => {
+            const bal = await web3.eth.getBalance(account)
+            setBalance(bal);
+        }
+        if (account && web3) {
+            fetch()
+        }
+    }, [web3, account])
+
+    return {
+        web3,
+        account,
+        balance,
+        displayAccount: `${account?.substring(0, 4)}...${account?.substring(account?.length - 4, account?.length)}`,
+        connected: account ? true : false
+    }
 }

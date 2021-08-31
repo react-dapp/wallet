@@ -6,6 +6,7 @@ export * from '../hooks/useWeb3';
 export * from '../hooks/useWalletModal';
 export * from '../hooks/useLp';
 export * from '../hooks/useApproval';
+export * from '../hooks/useERC20Balance';
 export * from '../hooks/useContract';
 export * from '../hooks/useInputValue';
 export * from '../hooks/useWalletSign';

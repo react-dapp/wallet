@@ -1,5 +1,4 @@
 import { useWeb3 } from "./useWeb3";
-import { ethers } from "ethers";
 import { useState } from "react";
 import { STATE } from "../constants/enums";
 

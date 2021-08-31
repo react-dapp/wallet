@@ -11,7 +11,8 @@ import {
   useERC20Approval,
   useWaleltSign,
   useInputValue,
-} from './main'
+  toLower,
+} from './main/index'
 
 function App() {
   const [messageToSign, setMessageToSign] = useState('')
@@ -19,7 +20,7 @@ function App() {
   useEagerConnect();
 
   const { setOpen, deactivate, error: walletError } = useWalletModal();
-  const { account, connected } = useWeb3();
+  const { account, connected, balance } = useWeb3();
   const { price, loading } = useUSDLp('0x70fD59a757567Eb412ce96b4fcd5506c90ACEDbA')
   const { approve, approveState, approvedBalance, isApproved } = useERC20Approval('0x40619dc9F00ea34e51D96b6EC5d8a6aD75457434', '0x046564e17dD76df34fF06200527b58B9173b4fdE');
   const { sign, signState, signature } = useWaleltSign();
@@ -31,6 +32,7 @@ function App() {
         <h2>Wallet Modal Test</h2>
         <Button variant='outlined' onClick={() => connected ? deactivate() : setOpen(true)}>{connected ? 'Disconnect' : 'Connect'}</Button>
         <p>{connected && account}</p>
+        <p>{connected && toLower(balance).toString()}</p>
         <p style={{ color: 'red' }}>{walletError && walletError}</p>
 
         <h2>LP Test</h2>

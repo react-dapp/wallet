@@ -4,6 +4,12 @@ import ModalManager from '../components/ModalManager/ModalManager';
 import { WalletModal } from '../components/WalletModal/WalletModal'
 import WalletModalContext from '../contexts/walletModalContext'
 import ConfigProvider from '../contexts/configContext'
+import BigNumber from 'bignumber.js';
+
+BigNumber.config({
+  EXPONENTIAL_AT: 1000,
+  DECIMAL_PLACES: 80,
+})
 
 export const WalletProvider = ({ children, config }) => {
     const [isWalletOpen, setIsWalletOpen] = useState(false);

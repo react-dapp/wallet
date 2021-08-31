@@ -1,6 +1,5 @@
 import React from "react";
 import { Dialog, makeStyles } from "@material-ui/core";
-import PropTypes from "prop-types";
 import CloseIcon from "@material-ui/icons/Close";
 import CustomCard from '../CustomCard/CustomCard';
 import { useWalletModal } from '../../hooks/useWalletModal'
@@ -76,8 +75,3 @@ const ModalManager = ({ open, close, isDarkMode, ...props }) => {
 };
 
 export default ModalManager;
-
-ModalManager.propTypes = {
-    open: PropTypes.bool.isRequired,
-    close: PropTypes.func.isRequired,
-};
