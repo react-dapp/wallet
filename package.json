@@ -50,7 +50,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "rollup -c",
-    "publish": "npm run build && npm version patch && npm publish --access public"
+    "publish": "npm run build && npm version patch && npm publish"
   },
   "eslintConfig": {
     "extends": [
