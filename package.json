@@ -1,6 +1,6 @@
 {
   "name": "@dapp-utils/wallet",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "main": "src/main/index.js",
   "module": "dist/index.esm.js",
   "source": "src/main/index.js",
