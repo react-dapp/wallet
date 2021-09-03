@@ -4404,10 +4404,17 @@ var useERC721Approval = function useERC721Approval(erc721Address, toApprove) {
 };
 
 var useERC20Balance = function useERC20Balance(address) {
+  var decimals = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '18';
+
   var _useState = React.useState(undefined),
       _useState2 = _slicedToArray(_useState, 2),
       balance = _useState2[0],
       setBalance = _useState2[1];
+
+  var _useState3 = React.useState(undefined),
+      _useState4 = _slicedToArray(_useState3, 2),
+      displayBalance = _useState4[0],
+      setDisplayBalance = _useState4[1];
 
   var contract = useERC20(address);
 
@@ -4427,9 +4434,10 @@ var useERC20Balance = function useERC20Balance(address) {
 
               case 2:
                 bal = _context.sent;
-                setBalance(bal);
+                setBalance(new BigNumber__default$1['default'](bal));
+                setDisplayBalance(toLower(bal, decimals).toNumber());
 
-              case 4:
+              case 5:
               case "end":
                 return _context.stop();
             }
@@ -4446,7 +4454,10 @@ var useERC20Balance = function useERC20Balance(address) {
       fetch();
     }
   }, [contract]);
-  return balance;
+  return {
+    balance: balance,
+    displayBalance: displayBalance
+  };
 };
 
 var useInputValue = function useInputValue(maxValue) {

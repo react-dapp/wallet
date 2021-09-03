@@ -1,6 +1,6 @@
 import BigNumber from "bignumber.js";
 import { useEffect, useState } from "react";
-import { toLower } from "../main";
+import { toLower } from "../utils/utils";
 import { useERC20 } from "./useContract"
 import { useWeb3 } from "./useWeb3";
 
