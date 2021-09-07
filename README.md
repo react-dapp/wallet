@@ -31,6 +31,7 @@ Copy paste the following dependencies into your package.json, dependencies secti
 
     
 To use the package, first you need to import the `WalletProvider` and place it at the top level in the component tree.
+Use the config property, to configure supported chain and provide native wrapped token addresses (WETH, WBNB etc...)
 
 ```
 
@@ -39,7 +40,41 @@ import { WalletProvider } from "@react-dapp/wallet";
 
 ReactDOM.render(
   <React.StrictMode>
-    <WalletProvider isBSC={true} chainId={42} isDarkMode={false}>
+    <WalletProvider config={{
+      chainId: 56,
+      bsc: true,
+      darkMode: false,
+      wrappedNative: {
+          address: '',
+          symbol: ''
+      },
+      usd: {
+          address: '',
+          symbol: ''
+      },
+      nativeUsdLp: {
+          address: '',
+          symbol: ''
+      },
+      rpcUrls: {
+          56: 'https://bsc-dataseed.binance.org/',
+          97: 'https://data-seed-prebsc-1-s1.binance.org:8545/'
+      },
+      walletConnectPoolingInterval: 12000,
+      supportedChainIds: [1, 3, 4, 5, 42, 56, 97],
+      unsupportedChainSetup: {
+          97: {
+              chainId: `0x61`,
+              chainName: 'Binance Smart Chain Testnet',
+              nativeCurrency: {
+                  name: 'BNB',
+                  symbol: 'bnb',
+                  decimals: 18,
+              },
+              rpcUrls: ['https://data-seed-prebsc-1-s1.binance.org:8545/'],
+              blockExplorerUrls: ['https://testnet.bscscan.com'],
+          },
+    }}>
       ...
     </WalletProvider>
   </React.StrictMode>,
