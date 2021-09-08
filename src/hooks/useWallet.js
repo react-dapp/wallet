@@ -15,7 +15,7 @@ import { useConnectors } from './useConnectors'
 import { useConfig } from '../contexts/configContext'
 import { useWalletModal } from './useWalletModal'
 
-const useWallet = (chainId) => {
+const useWallet = () => {
     const { setError, activate } = useWalletModal();
     const { config } = useConfig();
     const connectorsByName = useConnectors();
@@ -27,13 +27,13 @@ const useWallet = (chainId) => {
             window.localStorage.setItem(connectorLocalStorageKey, connectorID);
             activate(connector, async (error) => {
                 if (error instanceof UnsupportedChainIdError) {
-                    const network = config.unsupportedChainSetup[chainId];
-                    const hasSetup = await switchChain(network ?? { chainId: `0x${parseInt(chainId).toString(16)}` })
+                    const network = config.unsupportedChainSetup[config.chainId];
+                    const hasSetup = await switchChain(network ?? { chainId: `0x${parseInt(config.chainId).toString(16)}` })
                     if (hasSetup) {
                         await activate(connector)
                         setError(undefined)
                     } else {
-                        setError(`Unable to connect to required network ${chainId ? chainId : ''}`)
+                        setError(`Unable to connect to required network ${config.chainId}`)
                     }
                 } else {
                     window.localStorage.removeItem(connectorLocalStorageKey)

@@ -5,6 +5,7 @@ import wallets from "../../constants/walletsConfig";
 import useWallet from '../../hooks/useWallet'
 import { connectorNames } from '../../hooks/useConnectors'
 import { useWalletModal } from '../../hooks/useWalletModal'
+import { useConfig } from '../../contexts/configContext'
 import { useWeb3React } from '@web3-react/core'
 
 const useStyles = makeStyles((theme) => ({
@@ -53,10 +54,11 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export const WalletModal = ({ chainId, isBSC, isDarkMode }) => {
+export const WalletModal = () => {
 
     const classes = useStyles();
-    const login = useWallet(chainId);
+    const { config } = useConfig()
+    const login = useWallet();
     const { setOpen } = useWalletModal();
     const { library } = useWeb3React();
 
@@ -78,10 +80,10 @@ export const WalletModal = ({ chainId, isBSC, isDarkMode }) => {
             </Typography>
             <Divider />
             <Grid container spacing={1} className={classes.grid}>
-                {wallets.filter((i) => isBSC || i.connector !== connectorNames.bsc).map((item, index) => (
+                {wallets.filter((i) => config.bsc || i.connector !== connectorNames.bsc).map((item, index) => (
                     <Grid item xs={12} key={index}>
-                        <div className={`flex ${isDarkMode ? classes.darkWalletBtn : classes.walletBtn}`} onClick={() => login(item.connector)}>
-                            <Typography className={isDarkMode ? classes.darkTitle : classes.title}>{item.title}</Typography>
+                        <div className={`flex ${config.darkMode ? classes.darkWalletBtn : classes.walletBtn}`} onClick={() => login(item.connector)}>
+                            <Typography className={config.darkMode ? classes.darkTitle : classes.title}>{item.title}</Typography>
                             <img alt="" src={item.image} />
                         </div>
                     </Grid>

@@ -2,7 +2,7 @@ import React from "react";
 import { Dialog, makeStyles } from "@material-ui/core";
 import CloseIcon from "@material-ui/icons/Close";
 import CustomCard from '../CustomCard/CustomCard';
-import { useWalletModal } from '../../hooks/useWalletModal'
+import { useConfig } from "../../contexts/configContext";
 
 const useStyles = makeStyles(() => ({
     root: {
@@ -39,8 +39,9 @@ const useStyles = makeStyles(() => ({
     }
 }));
 
-const ModalManager = ({ open, close, isDarkMode, ...props }) => {
+const ModalManager = ({ open, close, ...props }) => {
     const classes = useStyles();
+    const { config } = useConfig();
 
     return (
         <Dialog
@@ -61,12 +62,12 @@ const ModalManager = ({ open, close, isDarkMode, ...props }) => {
             }}
         >
             <CloseIcon
-                className={isDarkMode ? classes.darkCloseIcon : classes.closeIcon}
+                className={config.darkMode ? classes.darkCloseIcon : classes.closeIcon}
                 fontSize="small"
                 onClick={close}
             />
             {
-                isDarkMode ?
+                config.darkMode ?
                     <CustomCard style={{ overflow: "auto" }}>{props.children}</CustomCard>
                     : <div className={classes.root}>{props.children}</div>
             }

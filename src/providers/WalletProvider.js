@@ -7,8 +7,8 @@ import ConfigProvider from '../contexts/configContext'
 import BigNumber from 'bignumber.js';
 
 BigNumber.config({
-  EXPONENTIAL_AT: 1000,
-  DECIMAL_PLACES: 80,
+    EXPONENTIAL_AT: 1000,
+    DECIMAL_PLACES: 80,
 })
 
 export const WalletProvider = ({ children, config }) => {
@@ -25,8 +25,8 @@ export const WalletProvider = ({ children, config }) => {
             <WalletModalContext.Provider value={{ open: isWalletOpen, setOpen: setIsWalletOpen, error: error, setError: setError }}>
                 <ConfigProvider config={config}>
                     {children}
-                    <ModalManager isDarkMode={config?.darkMode} open={isWalletOpen} close={() => setIsWalletOpen(false)}>
-                        <WalletModal isBSC={config?.bsc} isDarkMode={config?.darkMode} chainId={config.chainId ?? 56} />
+                    <ModalManager open={isWalletOpen} close={() => setIsWalletOpen(false)}>
+                        <WalletModal />
                     </ModalManager>
                 </ConfigProvider>
             </WalletModalContext.Provider>
