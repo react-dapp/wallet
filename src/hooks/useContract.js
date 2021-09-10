@@ -9,6 +9,11 @@ const getContract = (abi, address, web3) => {
     return new web3.eth.Contract(abi, address);
 };
 
+export const useContract = (abi, address) => {
+  const { web3 } = useWeb3();
+  return useMemo(() => getContract(abi, address, web3), [web3]);
+};
+
 export const useERC721 = (address) => {
   const { web3 } = useWeb3();
   return useMemo(() => getContract(ERC721_ABI, address, web3), [web3]);
