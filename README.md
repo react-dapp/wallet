@@ -2,7 +2,10 @@
 
 A Minimalistic ethereum based wallet powered by web3-react with a simple wallet modal.
 
+[Live Demo](https://react-dapp-wallet.web.app/)
+
 You can find full usage of the package [here](https://github.com/react-dapp/wallet/blob/main/src/index.js).
+
 
 ## Getting Started
 
