@@ -68,8 +68,8 @@ function App() {
 ReactDOM.render(
   <React.StrictMode>
     <WalletProvider config={{
-      chainId: 42,
-      supportedChainIds: [42],
+      chainId: 56,
+      supportedChainIds: [56],
       wrappedNative: {
         address: '',
         symbol: 'WBNB'

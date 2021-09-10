@@ -50,7 +50,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "rollup -c",
-    "build-example" : "react-scripts build"
+    "build-demo" : "react-scripts build"
   },
   "eslintConfig": {
     "extends": [
