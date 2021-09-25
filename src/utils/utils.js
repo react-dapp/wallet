@@ -97,3 +97,16 @@ export const getTimeLeft = (delta) => {
 
     return { days, hours, minutes, seconds };
 };
+
+export const getApy = (
+    stakingTokenPrice,
+    rewardTokenPrice,
+    totalStaked,
+    tokenPerBlock,
+    blocksPerYear = new BigNumber(10512000)
+) => {
+    const totalRewardPricePerYear = new BigNumber(rewardTokenPrice).times(tokenPerBlock).times(blocksPerYear)
+    const totalStakingTokenInPool = new BigNumber(stakingTokenPrice).times(totalStaked)
+    const apy = totalRewardPricePerYear.div(totalStakingTokenInPool).times(100)
+    return apy.isNaN() || !apy.isFinite() ? null : apy.toNumber()
+}
