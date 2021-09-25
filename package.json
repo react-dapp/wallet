@@ -1,6 +1,6 @@
 {
   "name": "@react-dapp/wallet",
-  "version": "0.0.18",
+  "version": "0.0.19",
   "main": "dist/index.cjs.js",
   "module": "dist/index.esm.js",
   "source": "src/main/index.js",
@@ -50,7 +50,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "rollup -c",
-    "build-demo" : "react-scripts build"
+    "build-demo": "react-scripts build"
   },
   "eslintConfig": {
     "extends": [
