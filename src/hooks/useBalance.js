@@ -2,11 +2,13 @@ import BigNumber from "bignumber.js";
 import { useEffect, useState } from "react";
 import { toLower } from "../utils/utils";
 import { useERC20 } from "./useContract"
+import useRefresh from "./useRefresh"
 import { useWeb3 } from "./useWeb3";
 
 export const useERC20Balance = (address, decimals = '18') => {
     const [balance, setBalance] = useState(undefined);
     const [displayBalance, setDisplayBalance] = useState(undefined)
+    const { fastRefresh } = useRefresh();
 
     const contract = useERC20(address);
     const { account } = useWeb3();
@@ -20,7 +22,7 @@ export const useERC20Balance = (address, decimals = '18') => {
         if (contract) {
             fetch();
         }
-    }, [contract])
+    }, [contract, fastRefresh])
 
     return { balance, displayBalance };
 }

@@ -3,7 +3,8 @@ import { Web3ReactProvider } from '@web3-react/core';
 import ModalManager from '../components/ModalManager/ModalManager';
 import { WalletModal } from '../components/WalletModal/WalletModal'
 import WalletModalContext from '../contexts/walletModalContext'
-import ConfigProvider from '../contexts/configContext'
+import { ConfigContextProvider } from '../contexts/configContext'
+import { RefreshContextProvider } from '../contexts/refreshContext'
 import BigNumber from 'bignumber.js';
 
 BigNumber.config({
@@ -23,12 +24,14 @@ export const WalletProvider = ({ children, config }) => {
     return (
         <Web3ReactProvider getLibrary={(provider) => provider}>
             <WalletModalContext.Provider value={{ open: isWalletOpen, setOpen: setIsWalletOpen, error: error, setError: setError }}>
-                <ConfigProvider config={config}>
-                    {children}
-                    <ModalManager open={isWalletOpen} close={() => setIsWalletOpen(false)}>
-                        <WalletModal />
-                    </ModalManager>
-                </ConfigProvider>
+                <ConfigContextProvider config={config}>
+                    <RefreshContextProvider>
+                        {children}
+                        <ModalManager open={isWalletOpen} close={() => setIsWalletOpen(false)}>
+                            <WalletModal />
+                        </ModalManager>
+                    </RefreshContextProvider>
+                </ConfigContextProvider>
             </WalletModalContext.Provider>
         </Web3ReactProvider>
     );

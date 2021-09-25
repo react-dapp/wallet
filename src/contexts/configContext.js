@@ -6,7 +6,7 @@ const ConfigContext = React.createContext({
     setConfig: () => { }
 });
 
-const ConfigProvider = ({ children, config }) => {
+const ConfigContextProvider = ({ children, config }) => {
     const [_config, _setConfig] = useState({
         ...defaultConfig,
         ...config,
@@ -27,4 +27,4 @@ export const useConfig = () => {
     return useContext(ConfigContext);
 }
 
-export default ConfigProvider;
+export { ConfigContext, ConfigContextProvider };
