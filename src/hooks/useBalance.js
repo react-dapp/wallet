@@ -2,7 +2,7 @@ import BigNumber from "bignumber.js";
 import { useEffect, useState } from "react";
 import { toLower } from "../utils/utils";
 import { useERC20 } from "./useContract"
-import useRefresh from "./useRefresh"
+import { useRefresh } from "./useRefresh"
 import { useWeb3 } from "./useWeb3";
 
 export const useERC20Balance = (address, decimals = '18') => {
