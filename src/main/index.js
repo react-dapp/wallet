@@ -11,3 +11,4 @@ export * from '../hooks/useContract';
 export * from '../hooks/useInputValue';
 export * from '../hooks/useWalletSign';
 export * from '../hooks/useConnectors';
+export * from '../hooks/useRefresh';
