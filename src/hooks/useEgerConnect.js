@@ -1,5 +1,6 @@
 import { useEffect } from 'react'
 import { connectorLocalStorageKey } from '../constants/constants'
+import { useConfig } from '../contexts/configContext'
 import { connectorNames } from '../hooks/useConnectors'
 import useWallet from './useWallet'
 
@@ -18,6 +19,7 @@ const _binanceChainListener = async () =>
 
 export const useEagerConnect = () => {
     const login = useWallet()
+    const config = useConfig();
 
     useEffect(() => {
         const connectorId = window.localStorage.getItem(connectorLocalStorageKey);
@@ -34,6 +36,8 @@ export const useEagerConnect = () => {
             }
 
             login(connectorId)
+        } else {
+            login(config.config.defaultConnector)
         }
-    }, [login])
+    }, [login, config])
 }

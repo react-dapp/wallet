@@ -1,4 +1,5 @@
 import BigNumber from 'bignumber.js/bignumber'
+import { connectorNames } from '../hooks/useConnectors'
 
 BigNumber.config({
     EXPONENTIAL_AT: 1000,
@@ -6,6 +7,7 @@ BigNumber.config({
 })
 
 const config = {
+    defaultConnector: connectorNames.injected,
     chainId: 56,
     bsc: true,
     darkMode: false,
