@@ -39,5 +39,5 @@ export const useEagerConnect = () => {
         } else {
             login(config.config.defaultConnector)
         }
-    }, [login, config])
+    }, [login, config.config.defaultConnector])
 }
