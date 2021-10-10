@@ -6,7 +6,7 @@ import WalletModalContext from "../contexts/walletModalContext";
 import { ConfigContextProvider } from "../contexts/configContext";
 import { RefreshContextProvider } from "../contexts/refreshContext";
 import BigNumber from "bignumber.js";
-import { ThemeProvider } from "@material-ui/core";
+import { StylesProvider, ThemeProvider, createGenerateClassName } from "@material-ui/core";
 import Theme from "../constants/theme";
 
 BigNumber.config({
@@ -21,7 +21,11 @@ export const WalletProvider = ({ children, config }) => {
   useEffect(() => {
     if (error) console.log("Unable to connect Wallet!", error);
   }, [error]);
-
+  const generateClassName = createGenerateClassName({
+    productionPrefix: '@react-dapp/wallet',
+    disableGlobal: true,
+    seed: "@react-dapp/wallet"
+  });
   return (
     <Web3ReactProvider getLibrary={(provider) => provider}>
       <WalletModalContext.Provider
@@ -36,12 +40,14 @@ export const WalletProvider = ({ children, config }) => {
           <RefreshContextProvider>
             {children}
             <ThemeProvider theme={Theme}>
+              <StylesProvider generateClassName={generateClassName}>
               <ModalManager
                 open={isWalletOpen}
                 close={() => setIsWalletOpen(false)}
-              >
+                >
                 <WalletModal />
               </ModalManager>
+                </StylesProvider>
             </ThemeProvider>
           </RefreshContextProvider>
         </ConfigContextProvider>
