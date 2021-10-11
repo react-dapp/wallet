@@ -45,14 +45,15 @@
     "rollup-plugin-delete": "^2.0.0",
     "rollup-plugin-peer-deps-external": "^2.2.4",
     "rollup-plugin-postcss": "^4.0.1",
-    "web3": "^1.6.0"
+    "web3": "^1.6.0",
+    "css-modulesify": "^0.28.0"
   },
   "dependencies": {
-    "css-modulesify": "^0.28.0",
-    "react-modal": "^3.14.3",
-    "react-scripts": "4.0.3"
+    "react-scripts": "4.0.3",
+    "react-modal": "^3.14.3"
   },
   "peerDependencies": {
+    "react-modal": "^3.14.3",
     "@binance-chain/bsc-connector": "^1.0.0",
     "@material-ui/core": "^4.11.3",
     "@material-ui/icons": "^4.11.2",
