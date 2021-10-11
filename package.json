@@ -1,6 +1,6 @@
 {
   "name": "@react-dapp/wallet",
-  "version": "0.0.26",
+  "version": "0.0.27",
   "main": "dist/index.cjs.js",
   "module": "dist/index.esm.js",
   "source": "src/main/index.js",
@@ -32,17 +32,24 @@
     "@web3-react/injected-connector": "^6.0.7",
     "@web3-react/walletconnect-connector": "^6.2.4",
     "bignumber.js": "^9.0.1",
+    "ethereum-multicall": "^2.7.0",
+    "ethers": "^5.1.2",
+    "node-sass": "^6.0.1",
     "npm-run-all": "^4.1.5",
+    "postcss": "^8.3.9",
+    "postcss-import": "^14.0.2",
+    "postcss-loader": "^6.1.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "rollup": "^2.45.2",
     "rollup-plugin-delete": "^2.0.0",
     "rollup-plugin-peer-deps-external": "^2.2.4",
-    "ethereum-multicall": "^2.7.0",
-    "ethers": "^5.1.2",
+    "rollup-plugin-postcss": "^4.0.1",
     "web3": "^1.6.0"
   },
   "dependencies": {
+    "css-modulesify": "^0.28.0",
+    "react-modal": "^3.14.3",
     "react-scripts": "4.0.3"
   },
   "peerDependencies": {

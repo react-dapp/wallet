@@ -1,0 +1,58 @@
+.root {
+  padding: 20px;
+  overflow: auto;
+}
+.closeIcon {
+  position: absolute;
+  box-sizing: content-box;
+  right: 0;
+  top: 0;
+  transform: translate(17px, -17px);
+  background: #4f8dff;
+  color: white;
+  cursor: pointer;
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: 3px -3px 10px rgba(0, 0, 0, 0.3);
+}
+.darkCloseIcon {
+  position: absolute;
+  right: 0;
+  top: 0;
+  transform: translate(15px, -15px);
+  background: rgb(9, 9, 21);
+  color: magenta;
+  cursor: pointer;
+  padding: 5px;
+  border-radius: 10px;
+  height: 40px;
+  width: 40px;
+  z-index: 9;
+  border: 1px solid #bb00f2;
+  box-shadow: 3px -3px 10px rgba(0, 0, 0, 0.3);
+}
+
+.modal {
+  background-color: white;
+  border-radius: 10px;
+  position: relative;
+}
+
+.darkModal {
+  background-color: rgb(9, 9, 21);
+  border-radius: 10px;
+  position: relative;
+}
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 9;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
