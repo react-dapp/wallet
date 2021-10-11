@@ -28,9 +28,12 @@ const ModalManager = ({ open, close, ...props }) => {
     // >
     <ReactModal
       isOpen={open}
-      onRequestClose={close}
+      onRequestClose={() => {
+        close();
+      }}
       className={config.darkMode ? styles.darkModal : styles.modal}
       overlayClassName={styles.overlay}
+      parentSelector={() => document.body}
     >
       <CloseIcon
         className={config.darkMode ? styles.darkCloseIcon : styles.closeIcon}

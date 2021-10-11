@@ -24,7 +24,7 @@ export const WalletModal = () => {
     <div className={style.root}>
       <p className={config.darkMode?style.darkHeading:style.heading}>Connect Wallet</p>
       <div className={style.divider} />
-      <div container spacing={1} className={style.grid}>
+      <div spacing={1} className={style.grid}>
         {wallets
           .filter((i) => config.bsc || i.connector !== connectorNames.bsc)
           .map((item, index) => (
