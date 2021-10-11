@@ -20,7 +20,7 @@ export default {
     image(),
     external(),
     postcss({
-      extract: true,
+      extract: false,
       modules: true,
       use: ["sass"],
     }),
