@@ -12,16 +12,16 @@ const config = {
     bsc: true,
     darkMode: false,
     wrappedNative: {
-        address: '',
-        symbol: ''
+        address: '0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c',
+        symbol: 'WBNB'
     },
     usd: {
-        address: '',
-        symbol: ''
+        address: '0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56',
+        symbol: 'BUSD'
     },
     nativeUsdLp: {
-        address: '',
-        symbol: ''
+        address: '0x2E28b9B74D6d99D4697e913b82B41ef1CAC51c6C',
+        symbol: 'Cake-LP'
     },
     rpcUrls: {
         56: 'https://bsc-dataseed.binance.org/',
