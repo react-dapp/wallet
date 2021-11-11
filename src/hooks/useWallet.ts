@@ -1,7 +1,7 @@
 import { useCallback } from 'react'
 import { UnsupportedChainIdError } from '@web3-react/core'
 import { NoBscProviderError } from '@binance-chain/bsc-connector'
-import { connectorLocalStorageKey } from './../constants/constants'
+import { connectorLocalStorageKey } from './../config/constants'
 import {
     NoEthereumProviderError,
     UserRejectedRequestError as UserRejectedRequestErrorInjected,
@@ -28,17 +28,17 @@ const useWallet = () => {
             activate(connector, async (error) => {
                 if (error instanceof UnsupportedChainIdError) {
                     const network = config.unsupportedChainSetup[config.chainId];
-                    const hasSetup = await switchChain(network ?? { chainId: `0x${parseInt(config.chainId).toString(16)}` })
+                    const hasSetup = await switchChain(network ?? { chainId: `0x${parseInt(config.chainId.toString()).toString(16)}` })
                     if (hasSetup) {
                         await activate(connector)
-                        setError(undefined)
+                        setError(null)
                     } else {
-                        setError(`Unable to connect to required network ${config.chainId}`)
+                        setError(`@react-dapp/wallet: Unable to connect to required network ${config.chainId}`)
                     }
                 } else {
                     window.localStorage.removeItem(connectorLocalStorageKey)
                     if (error instanceof NoEthereumProviderError || error instanceof NoBscProviderError) {
-                        setError('Provider Error', 'No provider was found')
+                        setError('@react-dapp/wallet: No provider was found')
                     } else if (
                         error instanceof UserRejectedRequestErrorInjected ||
                         error instanceof UserRejectedRequestErrorWalletConnect
@@ -46,14 +46,14 @@ const useWallet = () => {
                         if (connector instanceof WalletConnectConnector) {
                             connector.walletConnectProvider = null
                         }
-                        setError('Authorization Error', 'Please authorize to access your account')
+                        setError('@react-dapp/wallet: Please authorize to access your account')
                     } else {
-                        setError(error.name, error.message)
+                        setError(`@react-dapp/wallet: ${error.name} ${error.message}`)
                     }
                 }
             })
         } else {
-            setError("Can't find connector", 'The connector config is wrong')
+            setError(`@react-dapp/wallet: Cannot find connector in the connector config`)
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [connectorsByName])

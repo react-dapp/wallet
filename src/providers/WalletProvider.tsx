@@ -1,20 +1,14 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Web3ReactProvider } from "@web3-react/core";
-import ModalManager from "../components/ModalManager/ModalManager";
 import { WalletModal } from "../components/WalletModal/WalletModal";
-import WalletModalContext from "../contexts/walletModalContext";
 import { ConfigContextProvider } from "../contexts/configContext";
-import { RefreshContextProvider } from "../contexts/refreshContext";
-import BigNumber from "bignumber.js";
+import { WalletConfig } from "../config/types";
+import WalletModalContext from "../contexts/walletModalContext";
+import ModalManager from "../components/ModalManager/ModalManager";
 
-BigNumber.config({
-  EXPONENTIAL_AT: 1000,
-  DECIMAL_PLACES: 80,
-});
-
-export const WalletProvider = ({ children, config }) => {
+export const WalletProvider = ({ children, config }: { children: React.ReactNode, config: WalletConfig }) => {
   const [isWalletOpen, setIsWalletOpen] = useState(false);
-  const [error, setError] = useState(undefined);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     if (error) console.log("Unable to connect Wallet!", error);
@@ -31,15 +25,13 @@ export const WalletProvider = ({ children, config }) => {
         }}
       >
         <ConfigContextProvider config={config}>
-          <RefreshContextProvider>
-            {children}
-            <ModalManager
-              open={isWalletOpen}
-              close={() => setIsWalletOpen(false)}
-            >
-              <WalletModal />
-            </ModalManager>
-          </RefreshContextProvider>
+          {children}
+          <ModalManager
+            open={isWalletOpen}
+            close={() => setIsWalletOpen(false)}
+          >
+            <WalletModal />
+          </ModalManager>
         </ConfigContextProvider>
       </WalletModalContext.Provider>
     </Web3ReactProvider>

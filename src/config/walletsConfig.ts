@@ -5,43 +5,43 @@ import TokenpocketIco from "../assets/icons/tokenpocket.svg";
 import WalletConnectIco from "../assets/icons/walletconnect.svg";
 import BinanceWalletIco from "../assets/icons/binancewallet.svg";
 import SafePalIco from "../assets/icons/safepalwallet.svg";
-import { connectorNames } from '../hooks/useConnectors';
+import { Connectors } from "./types";
 
 const wallets = [
     {
         title: "MetaMask",
         image: MetamaskIco,
-        connector: connectorNames.injected
+        connector: Connectors.INJECTED
     },
     {
         title: "Binance Chain Wallet",
         image: BinanceWalletIco,
-        connector: connectorNames.bsc
+        connector: Connectors.BSC
     },
     {
         title: "Trust Wallet",
         image: TrustWalletIco,
-        connector: connectorNames.injected,
+        connector: Connectors.INJECTED,
     },
     {
         title: "Wallet Connect",
         image: WalletConnectIco,
-        connector: connectorNames.walletConnect,
+        connector: Connectors.WALLET_CONNECT,
     },
     {
         title: "Math Wallet",
         image: MathWalletIco,
-        connector: connectorNames.injected,
+        connector: Connectors.INJECTED,
     },
     {
         title: "Token Pocket",
         image: TokenpocketIco,
-        connector: connectorNames.injected,
+        connector: Connectors.INJECTED,
     },
     {
         title: "SafePal Wallet",
         image: SafePalIco,
-        connector: connectorNames.injected,
+        connector: Connectors.INJECTED,
     },
 ];
 

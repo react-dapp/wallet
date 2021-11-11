@@ -1,19 +1,16 @@
 import React, { useState, useContext } from 'react'
-import defaultConfig from '../constants/config'
+import defaultConfig from '../config/config'
+import { WalletConfig } from '../config/types';
 
-const ConfigContext = React.createContext({
+const ConfigContext = React.createContext<{ config: WalletConfig, setConfig: (config: WalletConfig) => void }>({
     config: defaultConfig,
-    setConfig: () => { }
+    setConfig: () => null
 });
 
-const ConfigContextProvider = ({ children, config }) => {
+const ConfigContextProvider = ({ children, config }: { children: React.ReactNode, config: WalletConfig }) => {
     const [_config, _setConfig] = useState({
         ...defaultConfig,
-        ...config,
-        rpcUrls: {
-            ...defaultConfig,
-            ...config,
-        },
+        ...config
     })
 
     return (

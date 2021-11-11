@@ -1,12 +1,11 @@
-import React, { useEffect } from "react";
-import HelpOutlineOutlinedIcon from "@material-ui/icons/HelpOutlineOutlined";
-import wallets from "../../constants/walletsConfig";
+import { useEffect } from "react";
+import wallets from "../../config/walletsConfig";
 import useWallet from "../../hooks/useWallet";
-import { connectorNames } from "../../hooks/useConnectors";
 import { useWalletModal } from "../../hooks/useWalletModal";
 import { useConfig } from "../../contexts/configContext";
 import { useWeb3React } from "@web3-react/core";
 import style from "./WalletModal.module.css";
+import { Connectors } from "../../main";
 
 export const WalletModal = () => {
   const { config } = useConfig();
@@ -22,17 +21,16 @@ export const WalletModal = () => {
 
   return (
     <div className={style.root}>
-      <p className={config.darkMode?style.darkHeading:style.heading}>Connect Wallet</p>
+      <p className={config.darkMode ? style.darkHeading : style.heading}>Connect Wallet</p>
       <div className={style.divider} />
       <div spacing={1} className={style.grid}>
         {wallets
-          .filter((i) => config.bsc || i.connector !== connectorNames.bsc)
+          .filter((i) => config.bsc || i.connector !== Connectors.bsc)
           .map((item, index) => (
             <div key={index} style={{ marginBottom: 7 }}>
               <div
-                className={`${
-                  config.darkMode ? style.darkWalletBtn : style.walletBtn
-                }`}
+                className={`${config.darkMode ? style.darkWalletBtn : style.walletBtn
+                  }`}
                 onClick={() => login(item.connector)}
               >
                 <p className={config.darkMode ? style.darkTitle : style.title}>
@@ -44,7 +42,6 @@ export const WalletModal = () => {
           ))}
       </div>
       <p className={`${style.learnText}`}>
-        <HelpOutlineOutlinedIcon />
         &nbsp;Learn how to connect
       </p>
     </div>
