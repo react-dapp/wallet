@@ -30,6 +30,7 @@ ReactDOM.render(
     <WalletProvider config={{
       chainId: 56,
       supportedChainIds: [56],
+      unsupportedChainSetup : {},
       wrappedNative: {
         address: '',
         symbol: 'WBNB'

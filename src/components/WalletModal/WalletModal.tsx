@@ -7,7 +7,7 @@ import { useWeb3React } from "@web3-react/core";
 import style from "./WalletModal.module.css";
 import { Connectors } from "../../main";
 
-export const WalletModal = () => {
+export const WalletModal : React.FC = () => {
   const { config } = useConfig();
   const login = useWallet();
   const { setOpen } = useWalletModal();
@@ -23,9 +23,9 @@ export const WalletModal = () => {
     <div className={style.root}>
       <p className={config.darkMode ? style.darkHeading : style.heading}>Connect Wallet</p>
       <div className={style.divider} />
-      <div spacing={1} className={style.grid}>
+      <div  className={style.grid}>
         {wallets
-          .filter((i) => config.bsc || i.connector !== Connectors.bsc)
+          .filter((i) => config.bsc || i.connector !== Connectors.BSC)
           .map((item, index) => (
             <div key={index} style={{ marginBottom: 7 }}>
               <div

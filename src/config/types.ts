@@ -1,15 +1,17 @@
 import { AbstractConnector } from '@web3-react/abstract-connector'
 
 export interface WalletConfig {
-    defaultConnector: Connectors,
+    defaultConnector?: Connectors,
     chainId: number,
-    showBSCWallet: true,
-    darkMode: false,
-    walletConnectPoolingInterval: 12000,
+    showBSCWallet?: true,
+    darkMode?: false,
+    walletConnectPoolingInterval?: 12000,
     supportedChainIds: number[],
     unsupportedChainSetup: {
         [key: number]: Network
-    }
+    },
+    bsc? : any,
+    wrappedNative? : object
 }
 
 export interface Network {

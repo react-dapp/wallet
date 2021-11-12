@@ -2,13 +2,13 @@ import React from "react";
 import CustomCard from "../CustomCard/CustomCard";
 import { useConfig } from "../../contexts/configContext";
 import styles from "./ModalManager.module.css";
-import * as ReactModal from "react-modal";
+import ReactModal from "react-modal";
 
-const ModalManager = ({ open, close, ...props }) => {
+const ModalManager : React.FC<ModalManagerProps> = ({ open, close, ...props }) => {
   const { config } = useConfig();
 
   return (
-    <ReactModal
+     <ReactModal
       isOpen={open}
       onRequestClose={() => {
         close();
@@ -20,7 +20,6 @@ const ModalManager = ({ open, close, ...props }) => {
     >
       <button
         className={config.darkMode ? styles.darkCloseIcon : styles.closeIcon}
-        fontSize="small"
         onClick={close}
       />
       {config.darkMode ? (
@@ -33,3 +32,8 @@ const ModalManager = ({ open, close, ...props }) => {
 };
 
 export default ModalManager;
+
+interface ModalManagerProps {
+  open: boolean;
+  close: () => void;
+}
