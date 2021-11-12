@@ -31,9 +31,19 @@ ReactDOM.render(
       chainId: 56,
       supportedChainIds: [56],
       unsupportedChainSetup : {},
+      darkMode: false,
+      grid: false,
       wrappedNative: {
         address: '',
         symbol: 'WBNB'
+      },
+      theme: {
+        // closeTextColor: "red",
+        // closeBackgroundColor: "blue",
+        // headingColor: "orange",
+        // textColor: "green",
+        // backgroundColor: "coral",
+        // btnColor: "cyan",
       }
     }}>
       <App />

@@ -8,7 +8,7 @@ interface Props{
 const CustomCard : React.FC<Props> = ({ children, ...restProps }) => {
   return ( 
     <div className={styles.root} {...restProps}>
-      <div className={styles.body}>{children}</div>
+      <div className={styles.body} >{children}</div>
     </div>
   );
 };

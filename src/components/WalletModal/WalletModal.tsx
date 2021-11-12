@@ -7,7 +7,7 @@ import { useWeb3React } from "@web3-react/core";
 import style from "./WalletModal.module.css";
 import { Connectors } from "../../main";
 
-export const WalletModal : React.FC = () => {
+export const WalletModal: React.FC = () => {
   const { config } = useConfig();
   const login = useWallet();
   const { setOpen } = useWalletModal();
@@ -20,20 +20,29 @@ export const WalletModal : React.FC = () => {
   }, [library]);
 
   return (
-    <div className={style.root}>
-      <p className={config.darkMode ? style.darkHeading : style.heading}>Connect Wallet</p>
+    <div className={style.root} style={{backgroundColor: config?.theme?.backgroundColor}}>
+      <p className={config.darkMode ? style.darkHeading : style.heading} style={{color: config?.theme?.headingColor}}>
+        Connect Wallet
+      </p>
       <div className={style.divider} />
-      <div  className={style.grid}>
+      <div className={config.grid ? style.grid : style.noGrid}>
         {wallets
           .filter((i) => config.bsc || i.connector !== Connectors.BSC)
           .map((item, index) => (
             <div key={index} style={{ marginBottom: 7 }}>
               <div
-                className={`${config.darkMode ? style.darkWalletBtn : style.walletBtn
-                  }`}
+                className={`${
+                  config.darkMode ? style.darkWalletBtn : style.walletBtn
+                } ${config.grid && style.gridWalletBtn}`}
                 onClick={() => login(item.connector)}
+                style={{backgroundColor: config.theme?.btnColor}}
               >
-                <p className={config.darkMode ? style.darkTitle : style.title}>
+                <p
+                  className={`${
+                    config.darkMode ? style.darkTitle : style.title
+                  } ${config.grid && style.gridText}`}
+                  style={{color: config.theme?.textColor}}
+                >
                   {item.title}
                 </p>
                 <img alt="" src={item.image} />
@@ -41,9 +50,7 @@ export const WalletModal : React.FC = () => {
             </div>
           ))}
       </div>
-      <p className={`${style.learnText}`}>
-        &nbsp;Learn how to connect
-      </p>
+      <p className={`${style.learnText}`}  style={{color: config.theme?.textColor}}>&nbsp;Learn how to connect</p>
     </div>
   );
 };

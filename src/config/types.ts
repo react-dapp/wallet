@@ -4,7 +4,7 @@ export interface WalletConfig {
     defaultConnector?: Connectors,
     chainId: number,
     showBSCWallet?: true,
-    darkMode?: false,
+    darkMode?: boolean,
     walletConnectPoolingInterval?: 12000,
     supportedChainIds: number[],
     unsupportedChainSetup: {
@@ -12,6 +12,17 @@ export interface WalletConfig {
     },
     bsc? : any,
     wrappedNative? : object
+    grid?: boolean
+    theme? : WalletTheme
+}
+
+interface WalletTheme {
+    closeTextColor?: string,
+    closeBackgroundColor?: string,
+    headingColor?: string,
+    textColor?: string,
+    backgroundColor?: string,
+    btnColor?: string,
 }
 
 export interface Network {
