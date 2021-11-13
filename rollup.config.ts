@@ -6,9 +6,9 @@ import postcss from "rollup-plugin-postcss";
 import pkg from "./package.json";
 import image from "@rollup/plugin-image";
 import json from "@rollup/plugin-json";
-import typescript from '@rollup/plugin-typescript';
+import typescript from "@rollup/plugin-typescript";
 
-const extensions = [".js", ".ts", "jsx","tsx", "css"];
+const extensions = [".js", ".ts", "jsx", "tsx", "css"];
 
 export default {
   input: [pkg.source],
@@ -31,9 +31,11 @@ export default {
     }),
     babel({
       exclude: "node_modules/**",
-      babelHelpers: 'bundled'
+      babelHelpers: "bundled",
     }),
     del({ targets: ["dist/*"] }),
   ],
-  external: [Object.keys(pkg.dependencies || {})],
+  external: [
+    Object.keys({ ...pkg.dependencies, ...pkg.peerDependencies } || {}),
+  ],
 };
