@@ -11,7 +11,7 @@ export const WalletProvider = ({ children, config }: { children: React.ReactNode
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    if (error) console.log("Unable to connect Wallet!", error);
+    if (error) console.log(error);
   }, [error]);
 
   return (

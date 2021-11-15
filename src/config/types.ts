@@ -3,6 +3,7 @@ import { AbstractConnector } from '@web3-react/abstract-connector'
 export interface WalletConfig {
     defaultConnector: Connectors,
     chainId: number,
+    rpcUrl: string,
     showBSCWallet: true,
     darkMode: false,
     walletConnectPoolingInterval: 12000,

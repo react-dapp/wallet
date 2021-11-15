@@ -20,25 +20,29 @@ const useWallet = () => {
     const { config } = useConfig();
     const connectorsByName = useConnectors();
 
-    const login = useCallback((connectorID) => {
+    const login = useCallback(async (connectorID) => {
         if (!connectorsByName) return;
         const connector = connectorsByName[connectorID]
         if (connector) {
             window.localStorage.setItem(connectorLocalStorageKey, connectorID);
-            activate(connector, async (error) => {
+            setError(null)
+            await activate(connector, async (error) => {
                 if (error instanceof UnsupportedChainIdError) {
+                    console.log(error)
                     const network = config.unsupportedChainSetup[config.chainId];
                     const hasSetup = await switchChain(network ?? { chainId: `0x${parseInt(config.chainId.toString()).toString(16)}` })
                     if (hasSetup) {
-                        await activate(connector)
                         setError(null)
+                        await activate(connector, async (e) => {
+                            setError(`@react-dapp/wallet: ${error.message}`)
+                        })
                     } else {
                         setError(`@react-dapp/wallet: Unable to connect to required network ${config.chainId}`)
                     }
                 } else {
                     window.localStorage.removeItem(connectorLocalStorageKey)
                     if (error instanceof NoEthereumProviderError || error instanceof NoBscProviderError) {
-                        setError('@react-dapp/wallet: No provider was found')
+                        setError('@react-dapp/wallet: No wallet provider was found')
                     } else if (
                         error instanceof UserRejectedRequestErrorInjected ||
                         error instanceof UserRejectedRequestErrorWalletConnect
@@ -47,8 +51,10 @@ const useWallet = () => {
                             connector.walletConnectProvider = null
                         }
                         setError('@react-dapp/wallet: Please authorize to access your account')
+                    } else if ((error as any).code === -32002) {
+                        setError(`@react-dapp/wallet: Already processing wallet connect requuest, please click on wallet to unlock it!`)
                     } else {
-                        setError(`@react-dapp/wallet: ${error.name} ${error.message}`)
+                        setError(`@react-dapp/wallet: ${error.message}`)
                     }
                 }
             })

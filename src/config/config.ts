@@ -6,6 +6,7 @@ const config: WalletConfig = {
     showBSCWallet: true,
     darkMode: false,
     walletConnectPoolingInterval: 12000,
+    rpcUrl: 'https://bsc-dataseed.binance.org/',
     supportedChainIds: [1, 3, 4, 5, 42, 56, 97],
     unsupportedChainSetup: {
         97: {
