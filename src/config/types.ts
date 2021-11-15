@@ -17,7 +17,7 @@ export interface WalletConfig {
     theme? : WalletTheme
 }
 
-interface WalletTheme {
+export interface WalletTheme {
     closeTextColor?: string,
     closeBackgroundColor?: string,
     headingColor?: string,

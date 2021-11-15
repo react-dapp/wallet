@@ -21,8 +21,7 @@ export const useConnectors = () => {
         const walletconnect = new WalletConnectConnector({
             rpc: { [config.chainId]: config.rpcUrl },
             bridge: 'https://bridge.walletconnect.org',
-            qrcode: true,
-            pollingInterval: config.walletConnectPoolingInterval
+            qrcode: true
         })
 
         setConnectorsByName({
