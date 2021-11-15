@@ -6,7 +6,7 @@ import {
   WalletProvider,
   useWalletModal,
   useWalletProvider
-} from './main/index'
+} from '../src/index'
 
 function App() {
   useEagerConnect();
@@ -27,25 +27,7 @@ function App() {
 
 ReactDOM.render(
   <React.StrictMode>
-    <WalletProvider config={{
-      chainId: 56,
-      supportedChainIds: [56],
-      unsupportedChainSetup : {},
-      darkMode: false,
-      grid: false,
-      wrappedNative: {
-        address: '',
-        symbol: 'WBNB'
-      },
-      theme: {
-        // closeTextColor: "red",
-        // closeBackgroundColor: "blue",
-        // headingColor: "orange",
-        // textColor: "green",
-        // backgroundColor: "coral",
-        // btnColor: "cyan",
-      }
-    }}>
+    <WalletProvider>
       <App />
     </WalletProvider>
   </React.StrictMode>,

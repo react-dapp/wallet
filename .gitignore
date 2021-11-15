@@ -17,6 +17,7 @@
 .firebaserc
 firebase.json
 
+*.rollup.cache
 *.log
 
 # misc

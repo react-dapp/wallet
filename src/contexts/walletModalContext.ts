@@ -11,8 +11,8 @@ const WalletModalContext = React.createContext<{
 }>({
     open: false,
     error: null,
-    setOpen: (value) => null,
-    setError: (value) => null,
+    setOpen: () => null,
+    setError: () => null,
 });
 
 export default WalletModalContext;

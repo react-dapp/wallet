@@ -33,7 +33,7 @@ const useWallet = () => {
                     const hasSetup = await switchChain(network ?? { chainId: `0x${parseInt(config.chainId.toString()).toString(16)}` })
                     if (hasSetup) {
                         setError(null)
-                        await activate(connector, async (e) => {
+                        await activate(connector, async () => {
                             setError(`@react-dapp/wallet: ${error.message}`)
                         })
                     } else {

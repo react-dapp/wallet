@@ -8,7 +8,7 @@ import image from "@rollup/plugin-image";
 import json from "@rollup/plugin-json";
 import typescript from "@rollup/plugin-typescript";
 
-const extensions = [".js", ".ts", "jsx", "tsx", "css"];
+const extensions = [".ts", "tsx", "css"];
 
 export default {
   input: [pkg.source],
@@ -17,7 +17,10 @@ export default {
     { file: pkg.module, format: "esm" },
   ],
   plugins: [
-    typescript(),
+    typescript({
+      tsconfig: './tsconfig.json',
+      outputToFilesystem: true
+    }),
     json(),
     image(),
     external(),

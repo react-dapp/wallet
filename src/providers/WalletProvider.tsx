@@ -1,12 +1,18 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Web3ReactProvider } from "@web3-react/core";
 import { WalletModal } from "../components/WalletModal/WalletModal";
 import { ConfigContextProvider } from "../contexts/configContext";
 import { WalletConfig } from "../config/types";
+import defaultConfig from "../config";
 import WalletModalContext from "../contexts/walletModalContext";
 import ModalManager from "../components/ModalManager/ModalManager";
 
-export const WalletProvider = ({ children, config }: { children: React.ReactNode, config: WalletConfig }) => {
+interface WalletProviderProps {
+  children: React.ReactNode
+  config?: WalletConfig
+}
+
+export const WalletProvider: React.FC<WalletProviderProps> = ({ children, config = defaultConfig }) => {
   const [isWalletOpen, setIsWalletOpen] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
