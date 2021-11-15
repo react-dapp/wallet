@@ -13,9 +13,17 @@
   margin-bottom: 10px;
   margin-top: 0px;
 }
+.noGrid {
+  margin-top: 10px;
+  max-width: 300px;
+  
+}
 .grid {
   margin-top: 10px;
   max-width: 300px;
+  grid-template-columns: 1fr 1fr;
+  display: grid;
+  gap:5px;
 }
 .divider {
   height: 1px;
@@ -24,6 +32,7 @@
 }
 .root {
   color: rgba(0, 0, 0, 0.8);
+  width: 300px;
 }
 
 .learnText {
@@ -40,10 +49,10 @@
 
 .darkTitle {
   color: white;
+  font-weight: 700;
   font-size: 16px;
   font-family: sans-serif;
   margin: 0;
-  margin-right: 10px;
 }
 .title {
   color: #4f8dff;
@@ -51,7 +60,6 @@
   font-size: 16px;
   font-family: sans-serif;
   margin: 0;
-  margin-right: 10px;
 }
 .walletBtn {
   display: flex;
@@ -61,6 +69,16 @@
   background: rgb(239, 244, 245);
   border-radius: 15px;
   cursor: pointer;
+}
+.gridWalletBtn{
+  display: flex;
+  flex-flow: column;
+  gap:10px;
+  align-items: center;
+  padding: 8px 10px !important;
+}
+.gridText{
+  font-size: 15px;
 }
 .walletBtn:hover {
   background: rgba(239, 244, 245, 0.5);

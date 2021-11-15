@@ -1,4 +1,4 @@
-export { WalletProvider } from '../providers/WalletProvider';
+export { WalletProvider } from '../providers';
 export * as CONSTANTS from '../config/constants';
 export * from '../config/types';
 export * from '../utils/utils';

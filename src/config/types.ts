@@ -1,16 +1,29 @@
 import { AbstractConnector } from '@web3-react/abstract-connector'
 
 export interface WalletConfig {
-    defaultConnector: Connectors,
+    defaultConnector?: Connectors,
     chainId: number,
     rpcUrl: string,
-    showBSCWallet: true,
-    darkMode: false,
+    showBSCWallet: boolean,
+    darkMode: boolean,
     walletConnectPoolingInterval: 12000,
     supportedChainIds: number[],
     unsupportedChainSetup: {
         [key: number]: Network
-    }
+    },
+    bsc? : any,
+    wrappedNative? : object
+    grid?: boolean
+    theme? : WalletTheme
+}
+
+interface WalletTheme {
+    closeTextColor?: string,
+    closeBackgroundColor?: string,
+    headingColor?: string,
+    textColor?: string,
+    backgroundColor?: string,
+    btnColor?: string,
 }
 
 export interface Network {
