@@ -53,8 +53,8 @@
   },
   "@binance-chain/bsc-connector": "^1.0.0",
   "peerDependencies": {
-    "@web3-react/core": "^6.1.9",
     "@binance-chain/bsc-connector": "^1.0.0",
+    "@web3-react/core": "^6.1.9",
     "@web3-react/injected-connector": "^6.0.7",
     "@web3-react/walletconnect-connector": "^6.2.4",
     "react": "^16.8.6 || ^17.0.0",

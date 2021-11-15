@@ -8,7 +8,7 @@ import image from "@rollup/plugin-image";
 import json from "@rollup/plugin-json";
 import typescript from "@rollup/plugin-typescript";
 
-const extensions = [".ts", "tsx", "css"];
+const extensions = [".ts", "tsx"];
 
 export default {
   input: [pkg.source],
