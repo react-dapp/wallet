@@ -17,11 +17,13 @@ const _binanceChainListener = async () =>
         }),
     )
 
-export const useEagerConnect = () => {
+export const useEagerConnect = (shouldConnect: boolean = true) => {
     const login = useWallet()
     const { config } = useConfig();
 
     useEffect(() => {
+        if (!shouldConnect) return;
+
         const connectorId = window.localStorage.getItem(connectorLocalStorageKey);
 
         if (connectorId && Number.isInteger(connectorId)) {
