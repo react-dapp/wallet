@@ -22,6 +22,7 @@ export const useEagerConnect = (shouldConnect: boolean = true) => {
     const { config } = useConfig();
 
     useEffect(() => {
+        console.log('in eager connect...')
         if (!shouldConnect) return;
 
         const connectorId = window.localStorage.getItem(connectorLocalStorageKey);
@@ -41,5 +42,5 @@ export const useEagerConnect = (shouldConnect: boolean = true) => {
         } else {
             login(config.defaultConnector)
         }
-    }, [login, config.defaultConnector])
+    }, [login, config.defaultConnector, shouldConnect])
 }

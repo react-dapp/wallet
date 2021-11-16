@@ -3,12 +3,12 @@ import { useContext, useEffect } from 'react';
 import WalletModalContext from '../contexts/walletModalContext'
 
 export const useWalletModal = () => {
-    const { activate, deactivate, error: web3ReactError } = useWeb3React()
+    const { deactivate, error: web3ReactError } = useWeb3React()
     const { open, setOpen, error, setError } = useContext(WalletModalContext);
 
     useEffect(() => {
         if (web3ReactError)
-            console.log('Web3 React:', web3ReactError)
+            console.log('@web3react:', web3ReactError)
     }, [web3ReactError])
 
     useEffect(() => {
@@ -17,5 +17,5 @@ export const useWalletModal = () => {
     }, [error])
 
 
-    return { open, error, setOpen, activate, deactivate, setError };
+    return { open, error, setOpen, deactivate, setError };
 }
