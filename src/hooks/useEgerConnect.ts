@@ -1,11 +1,11 @@
 import { useEffect } from 'react'
-import { connectorLocalStorageKey } from '../constants/constants'
+import { Connectors } from '../config/types'
+import { connectorLocalStorageKey } from '../config/constants'
 import { useConfig } from '../contexts/configContext'
-import { connectorNames } from '../hooks/useConnectors'
 import useWallet from './useWallet'
 
 const _binanceChainListener = async () =>
-    new Promise((resolve) =>
+    new Promise<void>((resolve) =>
         Object.defineProperty(window, 'BinanceChain', {
             get() {
                 return this.bsc
@@ -17,15 +17,18 @@ const _binanceChainListener = async () =>
         }),
     )
 
-export const useEagerConnect = () => {
+export const useEagerConnect = (shouldConnect: boolean = true) => {
     const login = useWallet()
-    const config = useConfig();
+    const { config } = useConfig();
 
     useEffect(() => {
+        console.log('in eager connect...')
+        if (!shouldConnect) return;
+
         const connectorId = window.localStorage.getItem(connectorLocalStorageKey);
 
-        if (connectorId) {
-            const isConnectorBinanceChain = connectorId === connectorNames.bsc
+        if (connectorId && Number.isInteger(connectorId)) {
+            const isConnectorBinanceChain = Number(connectorId) === Connectors.BSC
             const isBinanceChainDefined = Reflect.has(window, 'BinanceChain')
 
             // Currently BSC extension doesn't always inject in time.
@@ -37,7 +40,7 @@ export const useEagerConnect = () => {
 
             login(connectorId)
         } else {
-            login(config.config.defaultConnector)
+            login(config.defaultConnector)
         }
-    }, [login, config.config.defaultConnector])
+    }, [login, config.defaultConnector, shouldConnect])
 }

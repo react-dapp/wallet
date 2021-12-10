@@ -1,7 +1,7 @@
 import { useCallback } from 'react'
-import { UnsupportedChainIdError } from '@web3-react/core'
+import { UnsupportedChainIdError, useWeb3React } from '@web3-react/core'
 import { NoBscProviderError } from '@binance-chain/bsc-connector'
-import { connectorLocalStorageKey } from './../constants/constants'
+import { connectorLocalStorageKey } from './../config/constants'
 import {
     NoEthereumProviderError,
     UserRejectedRequestError as UserRejectedRequestErrorInjected,
@@ -16,29 +16,34 @@ import { useConfig } from '../contexts/configContext'
 import { useWalletModal } from './useWalletModal'
 
 const useWallet = () => {
-    const { setError, activate } = useWalletModal();
+    const { setError } = useWalletModal();
+    const { activate } = useWeb3React();
     const { config } = useConfig();
     const connectorsByName = useConnectors();
 
-    const login = useCallback((connectorID) => {
+    const login = useCallback(async (connectorID) => {
         if (!connectorsByName) return;
         const connector = connectorsByName[connectorID]
         if (connector) {
             window.localStorage.setItem(connectorLocalStorageKey, connectorID);
-            activate(connector, async (error) => {
+            setError(null)
+            await activate(connector, async (error) => {
                 if (error instanceof UnsupportedChainIdError) {
+                    console.log(error)
                     const network = config.unsupportedChainSetup[config.chainId];
-                    const hasSetup = await switchChain(network ?? { chainId: `0x${parseInt(config.chainId).toString(16)}` })
+                    const hasSetup = await switchChain(network ?? { chainId: `0x${parseInt(config.chainId.toString()).toString(16)}` })
                     if (hasSetup) {
-                        await activate(connector)
-                        setError(undefined)
+                        setError(null)
+                        await activate(connector, async () => {
+                            setError(`${error.message}`)
+                        })
                     } else {
                         setError(`Unable to connect to required network ${config.chainId}`)
                     }
                 } else {
                     window.localStorage.removeItem(connectorLocalStorageKey)
                     if (error instanceof NoEthereumProviderError || error instanceof NoBscProviderError) {
-                        setError('Provider Error', 'No provider was found')
+                        setError('No wallet provider was found')
                     } else if (
                         error instanceof UserRejectedRequestErrorInjected ||
                         error instanceof UserRejectedRequestErrorWalletConnect
@@ -46,14 +51,16 @@ const useWallet = () => {
                         if (connector instanceof WalletConnectConnector) {
                             connector.walletConnectProvider = null
                         }
-                        setError('Authorization Error', 'Please authorize to access your account')
+                        setError('Please authorize to access your account')
+                    } else if ((error as any).code === -32002) {
+                        setError(`Already processing wallet connect requuest, please click on wallet to unlock it!`)
                     } else {
-                        setError(error.name, error.message)
+                        setError(`${error.message}`)
                     }
                 }
             })
         } else {
-            setError("Can't find connector", 'The connector config is wrong')
+            setError(`Cannot find connector in the connector config`)
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [connectorsByName])
