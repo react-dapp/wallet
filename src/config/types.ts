@@ -12,11 +12,16 @@ export interface WalletConfig {
         [key: number]: Network
     },
     bsc? : any,
-    wrappedNative? : object
     grid?: boolean
     theme? : WalletTheme
 }
 
+export const CHAIN_ID = {
+    ETH: 1,
+    GOERLI: 5,
+    BSC: 56,
+    BSC_TESTNET: 97
+}
 export interface WalletTheme {
     closeTextColor?: string,
     closeBackgroundColor?: string,
