@@ -1,16 +1,15 @@
 import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
-import { useEagerConnect } from '../src/hooks/useEgerConnect'
-import { useWalletModal } from '../src/hooks/useWalletModal'
-import { useWalletProvider } from '../src/hooks/useWalletProvider'
-import { WalletProvider } from '../src/providers';
+import { useEagerConnect } from './hooks/useEgerConnect'
+import { useWallet } from './hooks/useWallet'
+import { WalletProvider } from './providers';
 
 function App() {
     const [eagerConnect, setEagerConnect] = useState(false)
 
     useEagerConnect(eagerConnect);
-    const { setOpen, deactivate, error: walletError } = useWalletModal();
-    const { account, connected } = useWalletProvider();
+    const { setOpen, deactivate, error: walletError } = useWallet();
+    const { account, connected } = useWallet();
 
     return (
         <div className="App" style={{ display: 'flex', alignItems: 'cetner', justifyContent: 'center' }}>

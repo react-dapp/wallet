@@ -1,8 +1,8 @@
 import { useEffect } from 'react'
 import { Connectors } from '../config/types'
-import { connectorLocalStorageKey } from '../config/constants'
+import { LOCAL_STORAGE_CONNECTOR } from '../config/constants'
 import { useConfig } from '../contexts/configContext'
-import useWallet from './useWallet'
+import useWalletLogin from './useWalletLogin'
 
 const _binanceChainListener = async () =>
     new Promise<void>((resolve) =>
@@ -18,14 +18,13 @@ const _binanceChainListener = async () =>
     )
 
 export const useEagerConnect = (shouldConnect: boolean = true) => {
-    const login = useWallet()
+    const login = useWalletLogin()
     const { config } = useConfig();
 
     useEffect(() => {
-        console.log('in eager connect...')
         if (!shouldConnect) return;
 
-        const connectorId = window.localStorage.getItem(connectorLocalStorageKey);
+        const connectorId = window.localStorage.getItem(LOCAL_STORAGE_CONNECTOR);
 
         if (connectorId && Number.isInteger(connectorId)) {
             const isConnectorBinanceChain = Number(connectorId) === Connectors.BSC
