@@ -4,6 +4,7 @@ import { BscConnector } from '@binance-chain/bsc-connector'
 import { useConfig } from '../contexts/configContext'
 import { useEffect, useState } from 'react'
 import { Connectors, ConnectorList } from '../config/types'
+const POLLING_INTERVAL = 12000
 
 export const useConnectors = () => {
     const { config } = useConfig();
@@ -21,7 +22,9 @@ export const useConnectors = () => {
         const walletconnect = new WalletConnectConnector({
             rpc: { [config.chainId]: config.rpcUrl },
             bridge: 'https://bridge.walletconnect.org',
-            qrcode: true
+            qrcode: true,
+            supportedChainIds: config.supportedChainIds,
+            pollingInterval: POLLING_INTERVAL
         })
 
         setConnectorsByName({
