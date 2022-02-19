@@ -24,6 +24,7 @@ const useWalletLogin = () => {
     const login = useCallback(async (connectorID) => {
         if (!connectorsByName) return;
         const connector = connectorsByName[connectorID]
+        console.log(connector)
         if (connector) {
             window.localStorage.setItem(LOCAL_STORAGE_CONNECTOR, connectorID);
             setError(null)

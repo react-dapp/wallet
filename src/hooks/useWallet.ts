@@ -17,5 +17,5 @@ export const useWallet = () => {
     }, [error])
 
 
-    return { open, account, library, chainId, connector, error, connected: Boolean(account), setOpen, deactivate, setError };
+    return { open, account, library, chainId, connector, error, setOpen, deactivate, setError };
 }

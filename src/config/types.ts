@@ -11,7 +11,6 @@ export interface WalletConfig {
     unsupportedChainSetup: {
         [key: number]: Network
     },
-    bsc? : any,
     grid?: boolean
     theme? : WalletTheme
 }

@@ -27,7 +27,7 @@ export const WalletModal: React.FC = () => {
       <div className={style.divider} />
       <div className={config.grid ? style.grid : style.noGrid}>
         {wallets
-          .filter((i) => config.bsc || i.connector !== Connectors.BSC)
+          .filter((i) => config.showBSCWallet || i.connector !== Connectors.BSC)
           .map((item, index) => (
             <div key={index} style={{ marginBottom: 7 }}>
               <div
