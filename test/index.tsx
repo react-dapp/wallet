@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
-import { useEagerConnect } from './hooks/useEgerConnect'
-import { useWallet } from './hooks/useWallet'
-import { WalletProvider } from './providers';
+import { CHAIN_ID } from '../src/config/types';
+import { useEagerConnect } from '../src/hooks/useEgerConnect'
+import { useWallet } from '../src/hooks/useWallet'
+import { WalletProvider } from '../src/providers';
 
 function App() {
     const [eagerConnect, setEagerConnect] = useState(false)
@@ -18,18 +19,24 @@ function App() {
                 <button onClick={() => connected ? deactivate() : setOpen(true)}>{connected ? 'Disconnect' : 'Connect'}</button>
                 <br />
                 <button onClick={() => setEagerConnect(!eagerConnect)}>{eagerConnect ? 'Disable Eager Connect' : 'Enable Eager Connect'}</button>
+                <br />
+                <button onClick={() => console.log('hello')}>test</button>
                 <p>{connected && account}</p>
                 <p style={{ color: 'red' }}>{walletError && walletError}</p>
             </header>
+
         </div >
     );
 }
 
 ReactDOM.render(
     <React.StrictMode>
-        <WalletProvider>
+        {/* @ts-ignore */}
+        <WalletProvider config={{ chainId: CHAIN_ID.BSC, supportedChainIds: [CHAIN_ID.BSC] }}>
             <App />
         </WalletProvider>
     </React.StrictMode>,
     document.getElementById('root')
 );
+
+
