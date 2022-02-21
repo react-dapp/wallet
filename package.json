@@ -54,7 +54,12 @@
   },
   "bundledDependencies": [
     "@web3-react/walletconnect-connector",
-    "@web3-react/injected-connector"
+    "@web3-react/injected-connector",
+    "react-modal",
+    "@web3-react/core",
+    "@web3-react/abstract-connector",
+    "@binance-chain/bsc-connector",
+    "@types/react-modal"
   ],
   "peerDependencies": {
     "@binance-chain/bsc-connector": "^1.0.0",
