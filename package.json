@@ -52,7 +52,12 @@
     "typescript": "^4.4.4",
     "@types/react-modal": "^3.13.1"
   },
-  "dependencies": {},
+  "dependencies": {
+    "@web3-react/walletconnect-connector": "6.2.4"
+  },
+  "bundledDependencies": {
+    "@web3-react/walletconnect-connector": "6.2.4"
+  },
   "peerDependencies": {
     "@binance-chain/bsc-connector": "^1.0.0",
     "@types/react-modal": "^3.13.1",
