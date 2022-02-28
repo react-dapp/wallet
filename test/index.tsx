@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
-import { CHAIN_ID } from './config/types';
-import { useEagerConnect } from './hooks/useEgerConnect'
-import { useWallet } from './hooks/useWallet'
-import { WalletProvider } from './providers';
+import { CHAIN_ID } from '../src/config/types';
+import { useEagerConnect } from '../src/hooks/useEgerConnect'
+import { useWallet } from '../src/hooks/useWallet'
+import { WalletProvider } from '../src/providers';
 
 function App() {
     const [eagerConnect, setEagerConnect] = useState(false)
