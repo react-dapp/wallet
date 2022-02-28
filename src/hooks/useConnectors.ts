@@ -1,39 +1,38 @@
-import { InjectedConnector } from '@web3-react/injected-connector'
-import { WalletConnectConnector } from '@web3-react/walletconnect-connector'
-import { BscConnector } from '@binance-chain/bsc-connector'
-import { useConfig } from '../contexts/configContext'
-import { useEffect, useState } from 'react'
-import { Connectors, ConnectorList } from '../config/types'
-const POLLING_INTERVAL = 12000
+import { InjectedConnector } from "@web3-react/injected-connector";
+import { WalletConnectConnector } from "@web3-react/walletconnect-connector";
+import { BscConnector } from "@binance-chain/bsc-connector";
+import { useConfig } from "../contexts/configContext";
+import { useEffect, useState } from "react";
+import { Connectors, ConnectorList } from "../config/types";
+const POLLING_INTERVAL = 12000;
 
 export const useConnectors = () => {
-    const { config } = useConfig();
-    const [connectorsByName, setConnectorsByName] = useState<ConnectorList>()
+  const { config } = useConfig();
+  const [connectorsByName, setConnectorsByName] = useState<ConnectorList>();
 
-    useEffect(() => {
-        const injected = new InjectedConnector({
-            supportedChainIds: config.supportedChainIds
-        })
+  useEffect(() => {
+    const injected = new InjectedConnector({
+      supportedChainIds: config.supportedChainIds.map((chainId) => chainId.id),
+    });
 
-        const bsc = new BscConnector({
-            supportedChainIds: config.supportedChainIds
-        })
+    const bsc = new BscConnector({
+      supportedChainIds: config.supportedChainIds.map((chainId) => chainId.id),
+    });
 
-        const walletconnect = new WalletConnectConnector({
-            rpc: { [config.chainId]: config.rpcUrl },
-            bridge: 'https://bridge.walletconnect.org',
-            qrcode: true,
-            supportedChainIds: config.supportedChainIds,
-            pollingInterval: POLLING_INTERVAL
-        })
+    const walletconnect = new WalletConnectConnector({
+      rpc: { [config.chainId]: config.rpcUrl },
+      bridge: "https://bridge.walletconnect.org",
+      qrcode: true,
+      supportedChainIds: config.supportedChainIds.map((chainId) => chainId.id),
+      pollingInterval: POLLING_INTERVAL,
+    });
 
-        setConnectorsByName({
-            [Connectors.INJECTED]: injected,
-            [Connectors.BSC]: bsc,
-            [Connectors.WALLET_CONNECT]: walletconnect
-        })
+    setConnectorsByName({
+      [Connectors.INJECTED]: injected,
+      [Connectors.BSC]: bsc,
+      [Connectors.WALLET_CONNECT]: walletconnect,
+    });
+  }, [config]);
 
-    }, [config])
-
-    return connectorsByName;
-}
+  return connectorsByName;
+};

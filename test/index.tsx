@@ -32,7 +32,7 @@ function App() {
 ReactDOM.render(
     <React.StrictMode>
         {/* @ts-ignore */}
-        <WalletProvider config={{ chainId: CHAIN_ID.BSC, supportedChainIds: [CHAIN_ID.BSC] }}>
+        <WalletProvider>
             <App />
         </WalletProvider>
     </React.StrictMode>,
