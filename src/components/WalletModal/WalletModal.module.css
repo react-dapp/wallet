@@ -73,6 +73,8 @@
 .gridWalletBtn{
   display: flex;
   flex-flow: column;
+  justify-content: center;
+  height: 100%;
   gap:10px;
   align-items: center;
   padding: 8px 10px !important;

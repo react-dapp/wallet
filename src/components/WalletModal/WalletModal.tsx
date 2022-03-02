@@ -31,14 +31,14 @@ export const WalletModal: React.FC = () => {
           .map((item, index) => (
             <div key={index} style={{ marginBottom: 7 }}>
               <div
-                className={`${config.darkMode ? style.darkWalletBtn : style.walletBtn
-                  } ${config.grid && style.gridWalletBtn}`}
+                className={`${config.darkMode ? style.darkWalletBtn : style.walletBtn} ${
+                  config.grid && style.gridWalletBtn
+                }`}
                 onClick={() => login(item.connector)}
                 style={{ backgroundColor: config.theme?.btnColor }}
               >
                 <p
-                  className={`${config.darkMode ? style.darkTitle : style.title
-                    } ${config.grid && style.gridText}`}
+                  className={`${config.darkMode ? style.darkTitle : style.title} ${config.grid && style.gridText}`}
                   style={{ color: config.theme?.textColor }}
                 >
                   {item.title}
@@ -48,7 +48,9 @@ export const WalletModal: React.FC = () => {
             </div>
           ))}
       </div>
-      <p className={`${style.learnText}`} style={{ color: config.theme?.textColor }}>&nbsp;Learn how to connect</p>
+      <p className={`${style.learnText}`} style={{ color: config.theme?.textColor }}>
+        &nbsp;Learn how to connect
+      </p>
     </div>
   );
 };

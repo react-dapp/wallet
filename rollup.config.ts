@@ -1,6 +1,5 @@
 import babel from "@rollup/plugin-babel";
 import resolve from "@rollup/plugin-node-resolve";
-import commonjs from "@rollup/plugin-commonjs";
 import external from "rollup-plugin-peer-deps-external";
 import del from "rollup-plugin-delete";
 import postcss from "rollup-plugin-postcss";
@@ -8,18 +7,24 @@ import pkg from "./package.json";
 import image from "@rollup/plugin-image";
 import json from "@rollup/plugin-json";
 import typescript from "@rollup/plugin-typescript";
+import sourcemaps from "rollup-plugin-sourcemaps";
 
 const extensions = [".js", ".ts", "jsx", "css"];
 
 export default {
   input: [pkg.source],
   output: [
-    { file: pkg.main, format: "cjs" },
-    { file: pkg.module, format: "esm" },
+    { file: pkg.main, format: "cjs", sourcemap: true },
+    { file: pkg.module, format: "es", sourcemap: true },
   ],
   plugins: [
-    commonjs(),
-    typescript({ compilerOptions: { module: "CommonJS" } }),
+    typescript({
+      tsconfig: "./tsconfig.json",
+      outputToFilesystem: true,
+      sourceMap: true,
+      inlineSourceMap: true,
+      inlineSources: true,
+    }),
     json(),
     image(),
     external(),
@@ -36,8 +41,7 @@ export default {
       babelHelpers: "bundled",
     }),
     del({ targets: ["dist/*"] }),
+    sourcemaps(),
   ],
-  external: [
-    Object.keys({ ...pkg.dependencies, ...pkg.peerDependencies } || {}),
-  ],
+  external: [Object.keys({ ...pkg.dependencies, ...pkg.peerDependencies } || {})],
 };

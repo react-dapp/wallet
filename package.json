@@ -1,10 +1,6 @@
 {
   "name": "@react-dapp/wallet",
-<<<<<<< HEAD
-  "version": "1.1.1",
-=======
   "version": "1.1.2",
->>>>>>> 4c2544fac75f1b1876d6cd231be0c6364a371e33
   "source": "src/index.ts",
   "main": "dist/index.cjs.js",
   "module": "dist/index.esm.js",
@@ -58,7 +54,8 @@
     "@web3-react/core": "^6.1.9",
     "@web3-react/injected-connector": "^6.0.7",
     "@web3-react/walletconnect-connector": "6.2.4",
-    "react-modal": "^3.14.4"
+    "react-modal": "^3.14.4",
+    "rollup-plugin-sourcemaps": "^0.6.3"
   },
   "bundledDependencies": [
     "@web3-react/core",
