@@ -1,5 +1,6 @@
 import babel from "@rollup/plugin-babel";
 import resolve from "@rollup/plugin-node-resolve";
+import commonjs from "@rollup/plugin-commonjs";
 import external from "rollup-plugin-peer-deps-external";
 import del from "rollup-plugin-delete";
 import postcss from "rollup-plugin-postcss";
@@ -17,10 +18,8 @@ export default {
     { file: pkg.module, format: "esm" },
   ],
   plugins: [
-    typescript({
-      tsconfig: './tsconfig.json',
-      outputToFilesystem: true
-    }),
+    commonjs(),
+    typescript({ compilerOptions: { module: "CommonJS" } }),
     json(),
     image(),
     external(),
