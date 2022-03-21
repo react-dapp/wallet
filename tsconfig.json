@@ -2,7 +2,7 @@
   "compilerOptions": {
     "outDir": ".",
     "rootDir": "src",
-    "target": "es5",
+    "target": "es6",
     "lib": [
       "dom",
       "dom.iterable",
@@ -10,6 +10,7 @@
     ],
     "allowJs": true,
     "skipLibCheck": true,
+    "sourceMap": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "strict": true,
@@ -18,13 +19,19 @@
     "moduleResolution": "node",
     "isolatedModules": true,
     "resolveJsonModule": true,
-    "noEmit": true,
+    "noEmit": false,
     "jsx": "react-jsx",
     "declaration": true,
+    "declarationDir": "dist",
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "incremental": true,
     "noFallthroughCasesInSwitch": true
+  },
+  "ts-node": {
+    "compilerOptions": {
+      "module": "CommonJS"
+    }
   },
   "include": [
     "src/**/*"

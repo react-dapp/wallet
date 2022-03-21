@@ -8,8 +8,9 @@ import image from "@rollup/plugin-image";
 import json from "@rollup/plugin-json";
 import typescript from "@rollup/plugin-typescript";
 import sourcemaps from "rollup-plugin-sourcemaps";
+import commonjs from "@rollup/plugin-commonjs"
 
-const extensions = [".js", ".ts", "jsx", "css"];
+const extensions = [".js", ".ts",".tsx", "jsx", "css"];
 
 export default {
   input: [pkg.source],
@@ -42,6 +43,7 @@ export default {
     }),
     del({ targets: ["dist/*"] }),
     sourcemaps(),
+    // commonjs(),
   ],
   external: [Object.keys({ ...pkg.dependencies, ...pkg.peerDependencies } || {})],
 };
