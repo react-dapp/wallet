@@ -2,7 +2,6 @@ import * as path from "path";
 import webpackNodeExternals from "webpack-node-externals";
 import { CleanWebpackPlugin } from "clean-webpack-plugin";
 import * as webpack from "webpack";
-import NodePolyfillPlugin from "node-polyfill-webpack-plugin";
 
 const config: webpack.Configuration = {
   module: {
@@ -51,7 +50,7 @@ const config: webpack.Configuration = {
     descriptionFiles: ["package.json"],
     extensions: ["", ".js", ".ts", ".tsx", ".jsx"],
   },
-  plugins: [new CleanWebpackPlugin(), new NodePolyfillPlugin()],
+  plugins: [new CleanWebpackPlugin()],
 };
 
 export default config;
