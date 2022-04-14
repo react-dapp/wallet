@@ -14,6 +14,7 @@ import { switchChain } from '../utils/utils'
 import { useConnectors } from './useConnectors'
 import { useConfig } from '../contexts/configContext'
 import { useWallet } from './useWallet'
+import { Network } from '../config/types'
 
 const useWalletLogin = () => {
     const { setError } = useWallet();
@@ -31,8 +32,8 @@ const useWalletLogin = () => {
             await activate(connector, async (error) => {
                 if (error instanceof UnsupportedChainIdError) {
                     console.log(error)
-                    const network = config.unsupportedChainSetup[config.chainId];
-                    const hasSetup = await switchChain(network ?? { chainId: `0x${parseInt(config.chainId.toString()).toString(16)}` })
+                    const network = config?.unsupportedChainSetup && config?.unsupportedChainSetup[config.chainId];
+                    const hasSetup = await switchChain(network ?? { chainId: `0x${parseInt(config.chainId.toString()).toString(16)}` } as Network)
                     if (hasSetup) {
                         setError(null)
                         await activate(connector, async () => {

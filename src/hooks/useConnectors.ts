@@ -12,18 +12,18 @@ export const useConnectors = () => {
 
   useEffect(() => {
     const injected = new InjectedConnector({
-      supportedChainIds: config.supportedChainIds.map((chainId) => chainId.id),
+      supportedChainIds: config?.supportedChainIds?.map((chainId) => chainId.id),
     });
 
     const bsc = new BscConnector({
-      supportedChainIds: config.supportedChainIds.map((chainId) => chainId.id),
+      supportedChainIds: config?.supportedChainIds?.map((chainId) => chainId.id),
     });
 
     const walletconnect = new WalletConnectConnector({
-      rpc: { [config.chainId]: config.rpcUrl },
+      rpc: { [config.chainId]: config.rpcUrl } as any,
       bridge: "https://bridge.walletconnect.org",
       qrcode: true,
-      supportedChainIds: config.supportedChainIds.map((chainId) => chainId.id),
+      supportedChainIds: config?.supportedChainIds?.map((chainId) => chainId.id),
       pollingInterval: POLLING_INTERVAL,
     });
 

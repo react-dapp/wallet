@@ -5,7 +5,6 @@ import { useWallet } from "../../hooks/useWallet";
 import { useConfig } from "../../contexts/configContext";
 import { useWeb3React } from "@web3-react/core";
 import style from "./WalletModal.module.css";
-import { Connectors } from "../../config/types";
 
 export const WalletModal: React.FC = () => {
   const { config } = useConfig();
@@ -17,40 +16,29 @@ export const WalletModal: React.FC = () => {
     if (library) {
       setOpen(false);
     }
-  }, [library]);
+  }, [library, setOpen]);
 
   return (
-    <div className={style.root} style={{ backgroundColor: config?.theme?.backgroundColor }}>
-      <p className={config.darkMode ? style.darkHeading : style.heading} style={{ color: config?.theme?.headingColor }}>
-        Connect Wallet
+    <div className={style.root}>
+      <p className={style.heading} style={{ color: config?.theme?.headingColor }}>
+        Connect a Web3 Wallet
       </p>
-      <div className={style.divider} />
-      <div className={config.grid ? style.grid : style.noGrid}>
-        {wallets
-          .filter((i) => config.showBSCWallet || i.connector !== Connectors.BSC)
-          .map((item, index) => (
-            <div key={index} style={{ marginBottom: 7 }}>
-              <div
-                className={`${config.darkMode ? style.darkWalletBtn : style.walletBtn} ${
-                  config.grid && style.gridWalletBtn
-                }`}
-                onClick={() => login(item.connector)}
-                style={{ backgroundColor: config.theme?.btnColor }}
-              >
-                <p
-                  className={`${config.darkMode ? style.darkTitle : style.title} ${config.grid && style.gridText}`}
-                  style={{ color: config.theme?.textColor }}
-                >
-                  {item.title}
-                </p>
-                <img alt="" src={item.image} />
-              </div>
-            </div>
-          ))}
+      <div className={style.walletsContainer}>
+        <div className={style.walletBtnContainer} onClick={() => login(wallets[0].connector)}>
+          <img src={wallets[0].image} alt="Metamask" height="90px" />
+          <p className={style.title} style={{ color: config?.theme?.textColor }}>
+            MetaMask
+          </p>
+        </div>
+        <div className={style.divider} />
+        <div className={style.walletBtnContainer} onClick={() => login(wallets[0].connector)}>
+          <img src={wallets[1].image} alt="WalletConnect" height="60px" />
+          <p className={style.title} style={{ color: config?.theme?.textColor, marginTop: 15 }}>
+            Wallet Connect
+          </p>
+        </div>
       </div>
-      <p className={`${style.learnText}`} style={{ color: config.theme?.textColor }}>
-        &nbsp;Learn how to connect
-      </p>
     </div>
   );
 };
+

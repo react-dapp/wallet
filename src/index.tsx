@@ -1,6 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { useEagerConnect, useWallet, WalletProvider } from "..";
+import { useEagerConnect } from "./hooks/useEgerConnect";
+import { useWallet } from "./hooks/useWallet";
+import { WalletProvider } from "./providers";
 
 function App() {
   useEagerConnect();
@@ -27,7 +29,11 @@ function App() {
 
 ReactDOM.render(
   <React.StrictMode>
-    <WalletProvider>
+    <WalletProvider 
+    
+    config={{
+      chainId: 5,
+    }}>
       <App />
     </WalletProvider>
   </React.StrictMode>,

@@ -19,7 +19,7 @@
     "moduleResolution": "node",
     "isolatedModules": true,
     "resolveJsonModule": true,
-    "noEmit": false,
+    "noEmit": true,
     "jsx": "react-jsx",
     "declaration": true,
     "declarationDir": "dist",

@@ -3,12 +3,12 @@ import { AbstractConnector } from "@web3-react/abstract-connector";
 export interface WalletConfig {
   defaultConnector?: Connectors;
   chainId: number;
-  rpcUrl: string;
-  showBSCWallet: boolean;
-  darkMode: boolean;
-  walletConnectPoolingInterval: 12000;
-  supportedChainIds: { id: number; rpcUrl: string }[];
-  unsupportedChainSetup: {
+  rpcUrl?: string;
+  // showBSCWallet: boolean;
+  // darkMode: boolean;
+  walletConnectPoolingInterval?: 12000;
+  supportedChainIds?: { id: number; rpcUrl: string }[];
+  unsupportedChainSetup?: {
     [key: number]: Network;
   };
   grid?: boolean;
@@ -26,8 +26,6 @@ export interface WalletTheme {
   closeBackgroundColor?: string;
   headingColor?: string;
   textColor?: string;
-  backgroundColor?: string;
-  btnColor?: string;
 }
 
 export interface Network {

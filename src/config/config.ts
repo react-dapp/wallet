@@ -3,8 +3,8 @@ import { WalletConfig, Connectors } from "./types";
 const config: WalletConfig = {
   defaultConnector: Connectors.INJECTED,
   chainId: 56,
-  showBSCWallet: true,
-  darkMode: false,
+  // showBSCWallet: true,
+  // darkMode: false,
   walletConnectPoolingInterval: 12000,
   rpcUrl: "https://bsc-dataseed.binance.org/",
   supportedChainIds: [

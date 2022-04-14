@@ -28,7 +28,7 @@
     "@types/react-modal": "^3.13.1",
     "@types/webpack": "^5.28.0",
     "@types/webpack-node-externals": "^2.5.3",
-    "babel-loader": "^8.2.3",
+    "babel-loader": "^8.1.0",
     "clean-webpack-plugin": "^4.0.0",
     "css-loader": "^6.7.1",
     "css-modulesify": "^0.28.0",
