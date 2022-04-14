@@ -57,6 +57,7 @@
     "@web3-react/injected-connector": "^6.0.7",
     "@web3-react/walletconnect-connector": "6.2.4",
     "assert": "^2.0.0",
+    "file-loader": "^6.2.0",
     "http": "^0.0.1-security",
     "https": "^1.0.0",
     "https-browserify": "^1.0.0",

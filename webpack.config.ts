@@ -32,6 +32,10 @@ const config: webpack.Configuration = {
           },
         ],
       },
+      {
+        test: /\.(jpe?g|png|gif|svg)$/i,
+        loader: "file-loader",
+      },
     ],
   },
   devtool: "inline-source-map",
@@ -54,3 +58,4 @@ const config: webpack.Configuration = {
 };
 
 export default config;
+
