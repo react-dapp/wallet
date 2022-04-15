@@ -9,17 +9,17 @@
   background: black;
   color: white;
   cursor: pointer;
-  padding: 10px;
   border-radius: 360px;
   box-shadow: 3px -3px 10px rgba(0, 0, 0, 0.3);
-  height: 15px;
-  width: 15px;
   display: flex;
   justify-content: center;
   align-items: center;
   font-family: monospace;
   font-size: 20px;
-  padding-top: 7px;
+  height: 30px;
+  width: 30px;
+  padding: 16px;
+  padding-top: 14px;
 }
 .modal {
   height: 100%;

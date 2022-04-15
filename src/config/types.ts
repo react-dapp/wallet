@@ -26,6 +26,7 @@ export interface WalletTheme {
   closeBackgroundColor?: string;
   headingColor?: string;
   textColor?: string;
+  closeBtnStyle?: React.CSSProperties;
 }
 
 export interface Network {

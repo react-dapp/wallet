@@ -19,7 +19,11 @@ const ModalManager: React.FC<ModalManagerProps> = ({ open, close, ...props }) =>
     >
       <div
         className={styles.closeIcon}
-        style={{ backgroundColor: config?.theme?.closeBackgroundColor, color: config.theme?.closeTextColor }}
+        style={{
+          background: config?.theme?.closeBackgroundColor,
+          color: config.theme?.closeTextColor,
+          ...config.theme?.closeBtnStyle,
+        }}
         onClick={close}
       >
         x
