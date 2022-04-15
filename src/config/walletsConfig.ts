@@ -6,8 +6,8 @@ import TokenpocketIco from "../assets/icons/tokenpocket.svg";
 import BinanceWalletIco from "../assets/icons/binancewallet.svg";
 import SafePalIco from "../assets/icons/safepalwallet.svg";
 import { Connectors } from "./types";
-import WalletConnectIco from "../assets/icons/walletconnect_big.png";
-import MetamaskIco from "../assets/icons/metamask_big.png";
+import WalletConnectIco from "../assets/icons/walletconnect_big.svg";
+import MetamaskIco from "../assets/icons/metamask_big.svg";
 
 const wallets = [
     {

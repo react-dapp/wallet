@@ -32,10 +32,10 @@ const config: webpack.Configuration = {
           },
         ],
       },
-      {
-        test: /\.(jpe?g|png|gif|svg)$/i,
-        loader: "file-loader",
-      },
+      // {
+      //   test: /\.png$/,
+      //   type: "asset/resource",
+      // },
     ],
   },
   devtool: "inline-source-map",
