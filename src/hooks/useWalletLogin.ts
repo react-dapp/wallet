@@ -51,7 +51,7 @@ const useWalletLogin = () => {
                         error instanceof UserRejectedRequestErrorWalletConnect
                     ) {
                         if (connector instanceof WalletConnectConnector) {
-                            connector.walletConnectProvider = null
+                            connector.walletConnectProvider = undefined
                         }
                         setError('Please authorize to access your account')
                     } else if ((error as any).code === -32002) {
