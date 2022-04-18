@@ -27,6 +27,7 @@ export interface WalletTheme {
   headingColor?: string;
   textColor?: string;
   closeBtnStyle?: React.CSSProperties;
+  lineColor?: string;
 }
 
 export interface Network {
@@ -58,3 +59,4 @@ export enum Connectors {
 export interface ConnectorList {
   [key: number]: AbstractConnector;
 }
+

@@ -30,7 +30,7 @@ export const WalletModal: React.FC = () => {
             MetaMask
           </p>
         </div>
-        <div className={style.divider} />
+        <div className={style.divider}  style={{ background: config?.theme?.lineColor }}/>
         <div className={style.walletBtnContainer} onClick={() => login(wallets[1].connector)}>
           <img src={wallets[1].image} alt="WalletConnect" height="60px" />
           <p className={style.title} style={{ color: config?.theme?.textColor, marginTop: 15 }}>
