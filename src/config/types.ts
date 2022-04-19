@@ -7,7 +7,7 @@ export interface WalletConfig {
   // showBSCWallet: boolean;
   // darkMode: boolean;
   walletConnectPoolingInterval?: 12000;
-  supportedChainIds?: { id: number; rpcUrl: string }[];
+  supportedChainIds?: { id: number; rpcUrl?: string }[];
   unsupportedChainSetup?: {
     [key: number]: Network;
   };
